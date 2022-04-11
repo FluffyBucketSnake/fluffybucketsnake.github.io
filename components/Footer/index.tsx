@@ -9,6 +9,7 @@ const Footer: FC = () => {
           href="https://github.com/fluffybucketsnake"
           target="_blank"
           rel="noopener noreferrer"
+          className="hover:text-gray-800 active:text-black"
         >
           <IoLogoGithub size={32} />
         </a>
@@ -16,6 +17,7 @@ const Footer: FC = () => {
           href="https://www.linkedin.com/in/fluffybucketsnake-1379/"
           target="_blank"
           rel="noopener noreferrer"
+          className="hover:text-gray-800 active:text-black"
         >
           <IoLogoLinkedin size={32} />
         </a>
