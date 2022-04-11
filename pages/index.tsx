@@ -12,7 +12,7 @@ const Home: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <Hero />
-      <main>
+      <main className="p-16">
         <RecentPosts posts={posts} />
       </main>
       <Footer />
