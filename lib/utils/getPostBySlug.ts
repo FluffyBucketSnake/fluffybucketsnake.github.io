@@ -15,6 +15,7 @@ export async function getPostBySlug(
   const { frontmatter, compiledSource } = await serialize(postSource, {
     parseFrontmatter: true,
   });
+  frontmatter && (frontmatter.slug = slug);
   if (!isPostMetadata(frontmatter)) {
     throw Error("The front matter of this post is invalid.");
   }
