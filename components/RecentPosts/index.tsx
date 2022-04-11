@@ -19,7 +19,7 @@ const RecentPosts: FC<RecentPostsProps> = ({ posts }) => {
         ))}
       </ol>
       <Link href="/blog" passHref>
-        <a className="flex flex-row text-base items-center uppercase p-2 self-end">
+        <a className="flex flex-row font-display text-base items-center uppercase p-2 self-end">
           See more
           <ChevronIcon className="fill-white ml-1" />
         </a>

@@ -3,9 +3,9 @@ import React, { FC } from "react";
 const Hero: FC = () => {
   return (
     <header className="flex flex-col justify-center align-center p-16 bg-blue-600 border-b-1 border-blue-400 text-white text-center overflow-hidden">
-      <h1 className="text-7xl text-center mb-4 -ml-[50%] -mr-[50%] relative">
+      <h1 className="text-7xl text-center mb-4 relative">
         Hi, I'm
-        <strong className="text-green-300 text-center before:content-['\A'] before:whitespace-pre">
+        <strong className="font-display text-green-300 text-center before:content-['\A'] before:whitespace-pre">
           Bruno Henrique Glowaski Morais
         </strong>
       </h1>
