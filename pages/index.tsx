@@ -1,5 +1,6 @@
 import Footer from "components/Footer";
 import Hero from "components/Hero";
+import NavBar from "components/NavBar";
 import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
 import type { GetStaticProps, NextPage } from "next";
@@ -11,6 +12,7 @@ type Props = {
 const Home: NextPage<Props> = ({ posts }) => {
   return (
     <>
+      <NavBar />
       <Hero />
       <main className="p-16">
         <RecentPosts posts={posts} />
