@@ -19,9 +19,9 @@ const RecentPosts: FC<RecentPostsProps> = ({ posts }) => {
         ))}
       </ol>
       <Link href="/blog" passHref>
-        <a className="flex flex-row font-display text-base items-center uppercase p-2 self-end">
+        <a className="flex flex-row font-display text-base items-center uppercase p-2 self-end text-gray-100 fill-gray-100 hover:text-white hover:fill-white active:text-gray-200 active:fill-gray-200">
           See more
-          <ChevronIcon className="fill-white ml-1" />
+          <ChevronIcon className="ml-1" />
         </a>
       </Link>
     </section>
