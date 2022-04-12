@@ -1,6 +1,7 @@
 import Footer from "components/Footer";
 import Hero from "components/Hero";
 import NavBar from "components/NavBar";
+import NavMenu from "components/NavMenu";
 import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
 import type { GetStaticProps, NextPage } from "next";
@@ -18,6 +19,7 @@ const Home: NextPage<Props> = ({ posts }) => {
         <RecentPosts posts={posts} />
       </main>
       <Footer />
+      <NavMenu />
     </>
   );
 };
