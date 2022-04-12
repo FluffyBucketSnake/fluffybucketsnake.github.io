@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
+import IconButton from "components/IconButton";
 
 const NavMenu = () => {
   return (
@@ -21,22 +22,24 @@ const NavMenu = () => {
         />
       </ul>
       <ul className="list flex flex-row justify-end mt-auto p-8 space-x-4">
-        <a
-          href="https://github.com/fluffybucketsnake"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-white active:text-gray-200"
-        >
-          <IoLogoGithub size={32} />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/fluffybucketsnake-1379/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-white active:text-gray-200"
-        >
-          <IoLogoLinkedin size={32} />
-        </a>
+        <li>
+          <IconButton
+            href="https://github.com/fluffybucketsnake"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <IoLogoGithub size={32} />
+          </IconButton>
+        </li>
+        <li>
+          <IconButton
+            href="https://www.linkedin.com/in/fluffybucketsnake-1379/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IoLogoLinkedin size={32} />
+          </IconButton>
+        </li>
       </ul>
     </nav>
   );

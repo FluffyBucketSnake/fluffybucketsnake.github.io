@@ -1,16 +1,13 @@
 import NavigationIcon from "@fluentui/svg-icons/icons/navigation_24_regular.svg";
+import IconButton from "components/IconButton";
 import React from "react";
 
 const NavBar = () => {
   return (
-    <nav className="absolute p-2">
-      <button className="group p-[12px]">
-        <NavigationIcon
-          className="fill-gray-100 group-hover:fill-white group-active:fill-gray-200"
-          width="24"
-          height="24"
-        />
-      </button>
+    <nav className="absolute p-2 z-20">
+      <IconButton className="p-[12px]">
+        <NavigationIcon width="24" height="24" />
+      </IconButton>
     </nav>
   );
 };
