@@ -4,7 +4,7 @@ import IconButton from "components/IconButton";
 
 const Footer: FC = () => {
   return (
-    <footer className="align-center mt-auto p-16 space-y-4 bg-green-500 border-t-1 border-green-300 text-gray-900">
+    <footer className="flex flex-col align-center mt-auto p-16 space-y-4 bg-green-500 border-t-1 border-green-300 text-gray-900">
       <ul className="flex justify-center flex-row space-x-4">
         <li>
           <IconButton
