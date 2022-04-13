@@ -5,21 +5,23 @@ import NavMenu from "components/NavMenu";
 import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
 import type { GetStaticProps, NextPage } from "next";
+import { useState } from "react";
 
 type Props = {
   posts: PostMetadata[];
 };
 
 const Home: NextPage<Props> = ({ posts }) => {
+  const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   return (
     <>
-      <NavBar />
+      <NavBar onOpenNavMenu={() => setNavMenuOpen(true)} />
       <Hero />
       <main className="p-16">
         <RecentPosts posts={posts} />
       </main>
       <Footer />
-      <NavMenu />
+      <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
     </>
   );
 };

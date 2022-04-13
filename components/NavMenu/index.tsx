@@ -2,26 +2,40 @@ import HomeIcon from "@fluentui/svg-icons/icons/home_32_regular.svg";
 import BlogIcon from "@fluentui/svg-icons/icons/content_view_32_regular.svg";
 import PersonIcon from "@fluentui/svg-icons/icons/person_32_regular.svg";
 import CoffeeIcon from "@fluentui/svg-icons/icons/drink_coffee_24_regular.svg";
+import CloseIcon from "@fluentui/svg-icons/icons/dismiss_24_regular.svg";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";
 import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 import IconButton from "components/IconButton";
 
-const NavMenu = () => {
+export type NavMenuProps = {
+  open: boolean;
+  onClose: () => void;
+};
+
+const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
   return (
-    <nav className="fixed flex flex-col top-0 w-[360px] h-[100vh] pt-[76px] overflow-y-auto z-10 bg-blue-600/80 backdrop-blur-lg border-r-1 border-blue-500">
-      <ul className="list py-8 space-y-4">
+    <nav
+      className={clsx(
+        "fixed flex flex-col items-start top-0 w-[360px] h-[100vh] overflow-y-auto z-20 bg-blue-600/80 backdrop-blur-lg border-r-1 border-blue-500",
+        !open && "hidden"
+      )}
+    >
+      <IconButton className="m-2 p-[12px] w-auto" onClick={onClose}>
+        <CloseIcon width="24" height="24" />
+      </IconButton>
+      <ul className="list py-8 w-[100%] space-y-4">
         <NavMenuItem href="/" icon={<HomeIcon />} label="Home" selected />
         <NavMenuItem href="/blog" icon={<BlogIcon />} label="Blog" />
         <NavMenuItem href="/about" icon={<PersonIcon />} label="About me" />
         <NavMenuItem
           href="/donate"
-          icon={<CoffeeIcon viewbox="0 0 24 24" width="32" height="32" />}
+          icon={<CoffeeIcon viewBox="0 0 24 24" width="32" height="32" />}
           label="Pay me a coffee"
         />
       </ul>
-      <ul className="list flex flex-row justify-end mt-auto p-8 space-x-4">
+      <ul className="list flex flex-row justify-end mt-auto p-8 w-[100%] space-x-4">
         <li>
           <IconButton
             href="https://github.com/fluffybucketsnake"
