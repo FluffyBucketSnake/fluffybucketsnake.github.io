@@ -19,7 +19,7 @@ const Home: NextPage<Props> = ({ posts }) => {
       <NavBar onOpenNavMenu={() => setNavMenuOpen(true)} />
       <Hero />
       <main className="p-16">
-        <RecentPosts posts={posts} />
+        <RecentPosts posts={posts} maxCount={3} />
       </main>
       <Footer />
       <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
@@ -29,10 +29,7 @@ const Home: NextPage<Props> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const posts: PostMetadata[] = await getAllPosts();
-  const mostRecentPosts = [...posts]
-    .sort((a, b) => a.date.getTime() - b.date.getTime())
-    .slice(0, 3);
-  return { props: { posts: mostRecentPosts } };
+  return { props: { posts } };
 };
 
 export default Home;
