@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { FC, HTMLAttributeAnchorTarget, ReactNode } from "react";
+import React, { FC, HTMLAttributeAnchorTarget, MouseEventHandler } from "react";
 
 export type IconButtonColor = "primaryContrast" | "secondaryContrast";
 
@@ -12,12 +12,14 @@ export type AnchorIconButtonProps = {
   href: string;
   rel?: string;
   target?: HTMLAttributeAnchorTarget;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 export type ButtonIconButtonProps = {
   href?: undefined;
   rel?: undefined;
   target?: undefined;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type IconButtonProps = BaseIconButtonProps &
@@ -29,6 +31,7 @@ const IconButton: FC<IconButtonProps> = ({
   color,
   href,
   rel,
+  onClick,
   target,
 }) => {
   let classes;
@@ -49,11 +52,22 @@ const IconButton: FC<IconButtonProps> = ({
   }
 
   return href ? (
-    <a href={href} rel={color} target={target} className={classes}>
+    <a
+      href={href}
+      rel={rel}
+      target={target}
+      className={classes}
+      onClick={onClick as MouseEventHandler<HTMLAnchorElement>}
+    >
       {children}
     </a>
   ) : (
-    <button className={classes}>{children}</button>
+    <button
+      className={classes}
+      onClick={onClick as MouseEventHandler<HTMLButtonElement>}
+    >
+      {children}
+    </button>
   );
 };
 
