@@ -12,5 +12,5 @@ module.exports = {
     },
     extend: { borderWidth: { 1: "1px" } },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
