@@ -13,7 +13,7 @@ type Props = {
   post: PostData;
 };
 
-const Home: NextPage<Props> = ({ post }) => {
+const BlogPostPage: NextPage<Props> = ({ post }) => {
   return (
     <DefaultLayout>
       <article>
@@ -48,4 +48,4 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   };
 };
 
-export default Home;
+export default BlogPostPage;

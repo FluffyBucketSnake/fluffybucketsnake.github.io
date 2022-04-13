@@ -8,7 +8,7 @@ type Props = {
   posts: PostMetadata[];
 };
 
-const Home: NextPage<Props> = ({ posts }) => {
+const BlogPage: NextPage<Props> = ({ posts }) => {
   return (
     <DefaultLayout>
       <RecentPosts posts={posts} />
@@ -21,4 +21,4 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   return { props: { posts } };
 };
 
-export default Home;
+export default BlogPage;

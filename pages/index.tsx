@@ -12,7 +12,7 @@ type Props = {
   posts: PostMetadata[];
 };
 
-const Home: NextPage<Props> = ({ posts }) => {
+const HomePage: NextPage<Props> = ({ posts }) => {
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   return (
     <>
@@ -32,4 +32,4 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   return { props: { posts } };
 };
 
-export default Home;
+export default HomePage;
