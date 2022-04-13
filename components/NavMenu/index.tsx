@@ -5,7 +5,7 @@ import CoffeeIcon from "@fluentui/svg-icons/icons/drink_coffee_24_regular.svg";
 import CloseIcon from "@fluentui/svg-icons/icons/dismiss_24_regular.svg";
 import clsx from "clsx";
 import Link from "next/link";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useEffect, useState } from "react";
 import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 import IconButton from "components/IconButton";
 
@@ -14,7 +14,42 @@ export type NavMenuProps = {
   onClose: () => void;
 };
 
+type PageInfo = {
+  href: string;
+  icon: ReactNode;
+  label: string;
+};
+
+const pages: PageInfo[] = [
+  {
+    href: "/",
+    icon: <HomeIcon />,
+    label: "Home",
+  },
+  {
+    href: "/blog",
+    icon: <BlogIcon />,
+    label: "Blog",
+  },
+  {
+    href: "/about",
+    icon: <PersonIcon />,
+    label: "About me",
+  },
+  {
+    href: "/donate",
+    icon: <CoffeeIcon viewBox="0 0 24 24" width="32" height="32" />,
+    label: "Pay me a coffee",
+  },
+];
+
 const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
+  const [currentPath, setCurrentPath] = useState<string>();
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+  }, []);
+
   return (
     <nav
       className={clsx(
@@ -26,14 +61,15 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
         <CloseIcon width="24" height="24" />
       </IconButton>
       <ul className="list py-8 w-[100%] space-y-4">
-        <NavMenuItem href="/" icon={<HomeIcon />} label="Home" selected />
-        <NavMenuItem href="/blog" icon={<BlogIcon />} label="Blog" />
-        <NavMenuItem href="/about" icon={<PersonIcon />} label="About me" />
-        <NavMenuItem
-          href="/donate"
-          icon={<CoffeeIcon viewBox="0 0 24 24" width="32" height="32" />}
-          label="Pay me a coffee"
-        />
+        {pages.map(({ href, icon, label }, index) => (
+          <NavMenuItem
+            key={index}
+            href={href}
+            icon={icon}
+            label={label}
+            selected={href === currentPath}
+          />
+        ))}
       </ul>
       <ul className="list flex flex-row justify-end mt-auto p-8 w-[100%] space-x-4">
         <li>
