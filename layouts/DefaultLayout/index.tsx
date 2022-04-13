@@ -9,7 +9,7 @@ const DefaultLayout: FC = ({ children }) => {
     <>
       <NavBar onOpenNavMenu={() => setNavMenuOpen(true)} />
       <NavMenu open={navMenuOpen} onClose={() => setNavMenuOpen(false)} />
-      <main className="mt-[76px] p-16 pt-0">{children}</main>
+      <main className="mt-[66px] p-16 pt-0">{children}</main>
       <Footer />
     </>
   );
