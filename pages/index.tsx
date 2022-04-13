@@ -16,7 +16,7 @@ const Home: NextPage<Props> = ({ posts }) => {
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   return (
     <>
-      <NavBar onOpenNavMenu={() => setNavMenuOpen(true)} />
+      <NavBar variant="overlay" onOpenNavMenu={() => setNavMenuOpen(true)} />
       <Hero />
       <main className="p-16">
         <RecentPosts posts={posts} maxCount={3} />
