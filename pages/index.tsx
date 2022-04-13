@@ -4,6 +4,7 @@ import NavBar from "components/NavBar";
 import NavMenu from "components/NavMenu";
 import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
+import { getAllPosts } from "lib/utils/getAllPosts";
 import type { GetStaticProps, NextPage } from "next";
 import { useState } from "react";
 
@@ -27,29 +28,11 @@ const Home: NextPage<Props> = ({ posts }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const posts: PostMetadata[] = [
-    {
-      slug: "0",
-      title: "Lorem Ipsum",
-      description: "Esse magna nulla reprehenderit nulla proident et.",
-      date: new Date(),
-    },
-    {
-      slug: "1",
-      title: "Consequat eiusmod",
-      description:
-        "Magna cillum est laborum reprehenderit pariatur irure cillum consequat deserunt.",
-      date: new Date(),
-    },
-    {
-      slug: "2",
-      title: "Minim sit sit",
-      description:
-        "Consequat eiusmod incididunt ea qui cupidatat sunt cillum culpa cillum.",
-      date: new Date(),
-    },
-  ];
-  return { props: { posts } };
+  const posts: PostMetadata[] = await getAllPosts();
+  const mostRecentPosts = [...posts]
+    .sort((a, b) => a.date.getTime() - b.date.getTime())
+    .slice(0, 3);
+  return { props: { posts: mostRecentPosts } };
 };
 
 export default Home;
