@@ -5,7 +5,6 @@ import { getPostMetadataFromFilename } from "./getPostMetadataFromFile";
 
 export async function getAllPosts(): Promise<PostMetadata[]> {
   const subdirectories = await readdir(PostDirectory);
-  console.log(subdirectories);
   const posts = await Promise.all(
     subdirectories.map(getPostMetadataFromFilename)
   );
