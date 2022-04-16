@@ -1,9 +1,13 @@
 import Footer from "components/Footer";
 import NavBar from "components/NavBar";
 import NavMenu from "components/NavMenu";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 
-const DefaultLayout: FC = ({ children }) => {
+export type DefaultLayoutProps = {
+  children?: ReactNode;
+};
+
+const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   return (
     <>

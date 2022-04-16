@@ -1,9 +1,15 @@
 import clsx from "clsx";
-import React, { FC, HTMLAttributeAnchorTarget, MouseEventHandler } from "react";
+import React, {
+  FC,
+  HTMLAttributeAnchorTarget,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 
 export type IconButtonColor = "primaryContrast" | "secondaryContrast";
 
 export type BaseIconButtonProps = {
+  children?: ReactNode;
   className?: string;
   color?: IconButtonColor;
 };
