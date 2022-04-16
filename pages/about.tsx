@@ -1,10 +1,15 @@
+import CodeIcon from "@fluentui/svg-icons/icons/code_24_filled.svg";
+import TechIcon from "@fluentui/svg-icons/icons/developer_board_24_filled.svg";
+import ToolIcon from "@fluentui/svg-icons/icons/wrench_24_filled.svg";
+import GameIcon from "@fluentui/svg-icons/icons/games_24_filled.svg";
+import TopicsIcon from "@fluentui/svg-icons/icons/lightbulb_24_filled.svg";
 import DefaultLayout from "layouts/DefaultLayout";
 import type { NextPage } from "next";
 
 const AboutPage: NextPage = () => {
   return (
     <DefaultLayout>
-      <article className="max-w-[65ch] prose prose-invert">
+      <article className="prose prose-invert">
         <header className="not-prose mb-8">
           <h1 className="font-display text-7xl text-gray-100">About me</h1>
           <h2 className="font-light text-5xl text-gray-100/75">
@@ -33,11 +38,17 @@ const AboutPage: NextPage = () => {
           coming up with the ideas for a project, thinking about the user's
           experience.
         </p>
-        <section>
-          <header>
-            <h4>Programming languages</h4>
+        <section className="not-prose card mb-4">
+          <header className="flex flex-row items-center mb-2 text-gray-100">
+            <CodeIcon
+              className="mr-2 min-w-[24px]"
+              fill="currentColor"
+              width="24"
+              height="24"
+            />
+            <h4 className="text-xl">Programming languages</h4>
           </header>
-          <ul>
+          <ul className="list list-disc list-inside">
             <li>
               <strong>C#</strong>
             </li>
@@ -57,11 +68,17 @@ const AboutPage: NextPage = () => {
             <li>Visual Basic.NET</li>
           </ul>
         </section>
-        <section>
-          <header>
-            <h4>Frameworks & engines</h4>
+        <section className="not-prose card mb-4">
+          <header className="flex flex-row items-center mb-2 text-gray-100">
+            <TechIcon
+              className="mr-2 min-w-[24px]"
+              fill="currentColor"
+              width="24"
+              height="24"
+            />
+            <h4 className="text-xl">Framework &amp; Engines</h4>
           </header>
-          <ul>
+          <ul className="list list-disc list-inside">
             <li>
               <strong>MonoGame</strong>
             </li>
@@ -91,11 +108,17 @@ const AboutPage: NextPage = () => {
             <li>WPF</li>
           </ul>
         </section>
-        <section>
-          <header>
-            <h4>Tools</h4>
+        <section className="not-prose card mb-4">
+          <header className="flex flex-row items-center mb-2 text-gray-100">
+            <ToolIcon
+              className="mr-2 min-w-[24px]"
+              fill="currentColor"
+              width="24"
+              height="24"
+            />
+            <h4 className="text-xl">Tools</h4>
           </header>
-          <ul>
+          <ul className="list list-disc list-inside">
             <li>
               <strong>Linux</strong>
             </li>
@@ -149,11 +172,17 @@ const AboutPage: NextPage = () => {
           others as to inspire them the same way I was once. That's the reason I
           created this blog.
         </p>
-        <section>
-          <header>
-            <h4>Favorite games</h4>
+        <section className="not-prose card mb-4">
+          <header className="flex flex-row items-center mb-2 text-gray-100">
+            <GameIcon
+              className="mr-2 min-w-[24px]"
+              fill="currentColor"
+              width="24"
+              height="24"
+            />
+            <h4 className="text-xl">Favorite games</h4>
           </header>
-          <ul>
+          <ul className="list list-disc list-inside">
             <li>
               <strong>Team Fortress 2</strong>
             </li>
@@ -169,11 +198,17 @@ const AboutPage: NextPage = () => {
             <li>Zomboid</li>
           </ul>
         </section>
-        <section>
-          <header>
-            <h4>Topics I'm interested</h4>
+        <section className="not-prose card mb-4">
+          <header className="flex flex-row items-center mb-2 text-gray-100">
+            <TopicsIcon
+              className="mr-2 min-w-[24px]"
+              fill="currentColor"
+              width="24"
+              height="24"
+            />
+            <h4 className="text-xl">Topics I'm interested</h4>
           </header>
-          <ul>
+          <ul className="list list-disc list-inside">
             <li>
               <strong>Game design &amp; development</strong>
             </li>
