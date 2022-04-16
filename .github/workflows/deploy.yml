@@ -22,6 +22,8 @@ jobs:
           cache: yarn
       - name: Install packages
         run: yarn install --immutable --immutable-cache --check-cache
+      - name: Ensure posts directory exists
+        run: mkdir -p ./posts
       - name: Build project
         run: yarn build
       - name: Export static files
