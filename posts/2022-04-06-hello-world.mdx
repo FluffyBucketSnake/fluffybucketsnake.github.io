@@ -1,0 +1,320 @@
+---
+title: Hello World
+description: A small beginning for a larger project
+date: 2022-04-16T15:55:02.180Z
+preview: ""
+draft: false
+tags: ""
+categories: ""
+lastmod: 2022-04-16T15:55:48.045Z
+---
+
+Hi, I'm **Bruno Henrique Glowaski Morais**, a Brazilian game and fullstack developer, and also passionate about anything computer related. I like developing applications of many different kinds, gaming(not that surprising), designing interfaces and drawing. I also enjoy learning new technologies and teaching others about them. As of the time I'm writing this post, I'm currently a computer science undergrad on his final steps towards completing his graduation, so I began preparing for finding some good career opportunities.
+
+However, I realized that, despite that I've been programming since kid and I studied a lot of technologies(like ASP.NET Core, Next.js, MonoGame, Vulkan, list goes on), I don't have a lot projects to demonstrate my practical knowledge. Heck, I don't even have a portfolio, just a GitHub repository with a some over-ambitious projects, a few actually completed.
+
+With this in mind, I've decided to start working on my own personal/professional site: a blog(yes, this one you're reading). This way, I can share what I know about software development, as well as other technologies, document the development of my other projects, publish them and, finally, use the site itself to impress others. That way, not only I have something to show results, I also have a way to teach others about development frameworks and tools, as well as some other topics too.
+
+### Goals
+
+Before anything else, let's expose this project's goals. Initially, this site needs to:
+
+- Allow me to create posts
+- Allow others to read said posts
+- Allow others to see my profile page
+
+These are the immediate goal. Basically, it's about getting the site up and running as fast as possible.
+
+However, after that's done, there are some other stuff I want to implement:
+
+- Animations;
+- Desktop-mode through responsive design;
+- A portfolio page;
+- Light & dark modes;
+- Progressive enhancement;
+- Portuguese language;
+- Multipart posts;
+- Automatic resume generator.
+
+Perhaps not all of the above will be actually implemented, perhaps I'll have new ideas to add to this site, but these are the initial goals.
+
+### Tooling
+
+At the start, I needed a free website hosting solution, with a free domain name(even if it's just a subdomain of another site).
+The first thing on my mind was *GitHub Pages*. It seems simple enough to just upload a site and get it running, and I also have the opportunity to learn more about *GitHub Actions*.
+
+However, GitHub Pages only host pages, so the website can only be made of static pages, without any *server-side rendering*. While manually writing each page is indeed a solution, it's inefficient and doesn't scale well. Instead, I'll be using *static site generation*.
+
+The solution I choose for that was Next.js, mainly because due to its popularity, but also because, from what I've seem, it requires very little configuration in comparison to *Gatsby*, for instance. Creating a page is basically creating a file with a React component, so it seems simple enough for this site.
+
+For styling, I want to take a look at *Tailwind CSS*.
+I heard that it's good for prototyping and, from I looked at, it reminds me somewhat of *Bootstrap* and its utility classes.
+I have already used *Material UI*, and I'm interested in taking a better look at *Chakra UI*. I also have tested *SASS* and *Styled-JSX*, and I know about *Emotion* and *Styled Components*. That said, I'd like something more JavaScript-less and I also like *Tailwind* utility classes approach.
+
+After looking up some tutorials, I decided to go with just `next-mdx-remote`, since it's recommended by the Next.js blog and it allow remote files to loaded and pre-processed. It also handles front matter parsing.
+
+Finally, to help me manage the content, I'm making use of the *FrontMatter VS Code extension*. It looks simple and extensible.
+
+### Prototyping
+
+Before actually working on the website itself, I'd like to first quick-sketch a prototype design for the site. It shouldn't have a lot of fidelity to the final design, instead being used to set the overall idea and design system for the design. For that, I'll just *Figma*.
+
+![Design of the homepage](/media/2022-04-06-hello-world-design-homepage.png "Initial design of the homepage")
+![Design of the menu](/media/2022-04-06-hello-world-design-menu.png "Initial design of the menu")
+![Design of the blog page](/media/2022-04-06-hello-world-design-blog-posts.png "Initial design of the main blog page")
+![Design of a blog post page](/media/2022-04-06-hello-world-design-post.png "Initial design of the a blog post page")
+![Design of the about page](/media/2022-04-06-hello-world-design-blog-posts.png "Initial design of the about page")
+![Design of the donations page](/media/2022-04-06-hello-world-design-donations.png "Initial design of the donations page")
+
+For this design, I used a *mobile-first* approach, starting with a small mobile screen. From what I've seen, in *GNOME*, for instance, a mobile-first can easily work with higher resolutions, such as desktops. Furthermore, since this site will start as a blog, a more content-centric design is probably a good choice.
+
+I like Microsoft's *Fluent Design* quite a lot. I've always liked the glass effect of *Aero* and I used to be a huge fan of the flat design of *Metro UI* - although, today, I recognize it is quite boring and uninteresting - and Fluent is like a nice combination of both. As such, I used as a major inspiration for the design.
+
+For the primary/secondary colors, I chose blue and a yellowish green. The main reason? I simply like these colors. Blue is my favorite color, so it had to be the primary. Green is the complementary color of blue in the *RYB* system. That said, both blue and green are associated with technology, so they work.
+
+For the typography, I decided to go with Oswald, Ubuntu and Fira Code as the stylized, default and monospace typefaces, respectively, since they are under permissive licenses. I wanted to use Sans Francisco and Segoe UI, but they are owned by Apple and Microsoft and aren't as permissive as the chosen ones. To avoid any possible legal issue, I preferred to use something that allows commercial use. After some trial-and-error, I've come to the conclusion that a 18px font size with a 28px line height works well for reading, although I might increase to make everything more easier to read.
+
+Finally, to make up the iconography, I've used mostly Fluent Icons, with some Ionicon icons for brands.
+
+## Creating the blog
+
+With the UI design pretty much done, it's time to move towards the implementation. The first priority, decide the routing:
+
+- `/`: the homepage, unsurprisingly;
+- `/blog`: the main page of the blob;
+- `/blog/post/[postSlug]`: the page for a specific blog post;
+- `/about`: the "about me" page;
+- `/donate`: the donations page.
+
+Next, the project structure:
+
+- `/components`: where custom React components are kept;
+- `/lib`: inside, lies this application's "business" logic. In this case, it basically refers to any logic outside of rendering;
+  - `/constants`: stores the configuration constants, which may or may not be loaded from *environment variables*;
+  - `/types`: holds general type definitions;
+  - `/utils`: stores general functions(which may be domain-related or just small utility functions);
+- `/pages`: keeps the Next.js page components.
+
+This is by no means the definitive project structure, but it works for now.
+
+With that done, it's time to get the markdown rendering working. The idea here is simple: the user navigates to a post page(such as `/blob/post/dummy`) and it will render the contents of a file with the filename equal to the slug and with either a `.md` or `.mdx` extension(using the previous example could be `dummy.md` or `dummy.mdx`).
+
+```tsx
+// /lib/constants/PostDirectory.ts
+import { join } from "path";
+
+export const PostDirectory = join(process.cwd(), "/posts");
+
+// /lib/types/PostData.ts
+import { PostMetadata } from "./PostMetadata";
+
+export type PostData = {
+  content: string;
+  meta: PostMetadata;
+};
+
+// /lib/types/PostMetadata.ts
+export type PostMetadata = {
+  slug: string;
+  title: string;
+  description: string;
+  date: Date;
+};
+
+// /lib/utils/getPostBySlug.ts
+import { readFile } from "fs/promises";
+import { PostData } from "lib/types/PostData";
+import { serialize } from "next-mdx-remote/serialize";
+import { getPostFilepathBySlug } from "./getPostFilepathBySlug";
+import { isPostMetadata } from "./isPostMetadata";
+
+export async function getPostBySlug(
+  slug: string
+): Promise<PostData | undefined> {
+  const postFilepath = await getPostFilepathBySlug(slug);
+  if (!postFilepath) {
+    return undefined;
+  }
+  const postSource = await readFile(postFilepath, "utf8");
+  const { frontmatter, compiledSource } = await serialize(postSource, {
+    parseFrontmatter: true,
+  });
+  frontmatter && (frontmatter.slug = slug);
+  if (!isPostMetadata(frontmatter)) {
+    throw Error("The front matter of this post is invalid.");
+  }
+  return { meta: frontmatter, content: compiledSource };
+}
+
+// /lib/utils/getPostFilepathBySlug.ts
+import { PostDirectory } from "lib/constants/PostDirectory";
+import { join } from "path";
+import { searchFilepathWithExtensions } from "./searchFilepathWithExtensions";
+
+export async function getPostFilepathBySlug(
+  slug: string
+): Promise<string | undefined> {
+  const filepathWithoutExtension = join(PostDirectory, slug);
+  return await searchFilepathWithExtensions(filepathWithoutExtension, [
+    ".md",
+    ".mdx",
+  ]);
+}
+
+// /lib/utils/isPostMetadata.ts
+import { PostMetadata } from "lib/types/PostMetadata";
+
+export function isPostMetadata(metadata: any): metadata is PostMetadata {
+  return (
+    metadata &&
+    typeof metadata.title === "string" &&
+    typeof metadata.description === "string" &&
+    metadata.date instanceof Date
+  );
+}
+
+// /lib/utils/searchFilepathWithExtension.ts
+import { access } from "fs/promises";
+import { constants } from "fs";
+
+export async function searchFilepathWithExtensions(
+  filepathWithoutExtension: string,
+  extensions: string[]
+): Promise<string | undefined> {
+  for (const ext of extensions) {
+    const filepath = filepathWithoutExtension + ext;
+    try {
+      await access(filepath, constants.R_OK);
+      return filepath;
+    } catch (err) {}
+  }
+}
+
+// /pages/index.tsx
+import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import fs from "fs";
+import util from "util";
+import styles from "../styles/Home.module.css";
+import { join } from "path";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
+import { PostData } from "lib/types/PostData";
+import { getPostBySlug } from "lib/utils/getPostBySlug";
+
+type Props = {
+  post: PostData;
+};
+
+const Home: NextPage<Props> = ({ post: { content } }) => {
+  return (
+    <div className={styles.container}>
+      <MDXRemote compiledSource={content} />
+    </div>
+  );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const post = await getPostBySlug("2022-04-06-hello-world");
+  return post ? { props: { post } } : { notFound: true };
+};
+
+export default Home;
+```
+
+While the code looks nice, after testing, I came across this error:
+
+"Error: Error serializing `.post.meta.date` returned from `getStaticProps` in "/". Reason: `object` ("[object Date]") be serialized as JSON. Please only return JSON serializable data."
+
+I knew that Next.js props serialization was finicky, but I wasn't expecting something as simple as the `Date` class to fail, but, then again, `Date` is a class, not a *POJO* type, so this should've been expected.
+
+There were some alternatives to solve this issue:
+
+- Stringify the whole post object before submitting;
+- Using SuperJSON babel plugin.
+
+While the first solution is simple, it'd reduce the code's expressiveness. The second solution is even simpler and requires no code changes(not including configuration files). All that needs to be done is to install `superjson` and `babel-plugin-superjson-next`, and add the latter as a Babel plugin.
+
+The main disadvantage of this approach is that it would replace *SWC* with *Babel*, probably reducing performance and speed, but neither of those are particularly relevant in this case, since the site will be statically compiled, as well as the app is not going to be very large, so a performance issue is not going to result in a relevant hit, in contrast to what would most likely happen to a larger application.
+
+With this single issue solved, the application now properly works:
+
+![Markdown rendering test](/media/2022-04-06-hello-world-rendered-markdown.png ("Ain't that a cute little gun?"))
+
+Yes, that is an earlier version of this very own post. Neat, huh?
+
+Of course, this site won't have just one page and just one post. That was just a way to quickly test the markdown rendering.
+
+That said, it's now the time to build the site.
+
+Normally, I like to start by structuring the content before actually styling the interface. That way, I can focus on the contents' semantic.
+
+Beginning with the home page, this is the structure that I came up:
+
+- Hero(`header`)
+  - Title(`h1`)
+  - Subtitle(`h2`)
+- Main content(`main`)
+  - Recent posts(`section`)
+    - Section title(`h3`)
+    - Ordered list of post cards(`ol > article`)
+      - Post title(`h4`)
+      - Description(`p`)
+- Footer(`footer`)
+  - Social media links(`div > a`)
+  - Author note(`span`)
+  - Developed with text(`span`)
+
+With the structure defined, now it's time to make it pretty. Wouldn't want my site looking worse than those stereotypical 90s webpages... or would I? That's a topic for another time.
+
+Regardless, the process went pretty smoothly. *Tailwind CSS* happened to have a really convenient plugin: `@tailwindcss/typography`. Its ability to control imported content really helped speed up the development of blog post page.
+
+After in some hours in total, I've managed to develop a basic blog site. Not the most interesting design, but it's good enough for now, as the focus is getting the site up and running with an adequate design.
+
+For the sake of future comparisons, this is the initial design of the blog:
+
+![Initial design of the blog](/media/2022-04-06-hello-world-initial-design.png)
+
+With this done, it's time to get into detailing the current page. However, this is a story for another post.
+
+Finally, it's time to deploy the application into the web. Like I said before, this will be done with *Github Pages* along with *Github Actions*. I used the workflow from [this page](https://fedeantuna.github.io/article/deploy-nextjs-app-to-github-pages) as a base. However, there are some issues.
+
+First, some actions used in the workflow were outdated, so I upgraded them. This really wasn't difficult.
+
+Second, the script uses *NPM*, instead of *Yarn*. While I could switch to *NPM*, luckily, the *Setup Node.js* action allows to use *Yarn* as the package manager with a simple option.
+
+Finally, while trying to push the initial page and execute the *CI* pipeline, I came across a weird issue:
+
+```text
+yarn run v1.22.17
+$ next build
+Failed to compile.
+
+./pages/_app.tsx:5:11
+Type error: 'Component' cannot be used as a JSX component.
+  Its element type 'ReactElement<any, any> | Component<{}, any, any> | null' is not a valid JSX element.
+    Type 'Component<{}, any, any>' is not assignable to type 'Element | ElementClass | null'.
+      Type 'Component<{}, any, any>' is not assignable to type 'ElementClass'.
+        The types returned by 'render()' are incompatible between these types.
+          Type 'React.ReactNode' is not assignable to type 'import("/home/fluffybucketsnake/Projects/Personal/fluffybucketsnake.github.io/node_modules/@mdx-js/react/node_modules/@types/react/index").ReactNode'.
+            Type '{}' is not assignable to type 'ReactNode'.
+
+  3 | 
+  4 | function MyApp({ Component, pageProps }: AppProps) {
+> 5 |   return <Component {...pageProps} />;
+    |           ^
+  6 | }
+  7 | 
+  8 | export default MyApp;
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+
+I'm still not quite sure what caused, but I were to guess it's due to a dependency version mismatch. I solved this issue by upgrading `@types/react` and `@types/react-dom`, but that leaves me with typings for a different version of *React*. I'll look better into this later.
+
+However, that broke *Next.js* build system. To fix that, I upgraded both `next` and `@types/node`.
+
+With that, the build is running successfully. Like previously said, there are some issues with this setup I want to take a better look at and there new features and details to implement, but that's going to be left for next time.
+
+Thanks for reading through this massive wall of text that was this first post. See ya!
