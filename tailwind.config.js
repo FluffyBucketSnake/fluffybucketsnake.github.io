@@ -10,7 +10,10 @@ module.exports = {
       default: ["Ubuntu", "ui-sans-serif", "sans-serif"],
       mono: ["Fira Code", "ui-monospace", "monospace"],
     },
-    extend: { borderWidth: { 1: "1px" } },
+    extend: {
+      borderWidth: { 1: "1px" },
+      backgroundImage: { "hero-main": "url('/media/bg.png')" },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };
