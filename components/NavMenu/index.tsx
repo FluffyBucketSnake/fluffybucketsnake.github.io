@@ -53,7 +53,7 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
   return (
     <nav
       className={clsx(
-        "fixed flex flex-col items-start top-0 w-[360px] h-[100vh] overflow-y-auto z-20 bg-blue-600/80 backdrop-blur-lg border-r-1 border-blue-500",
+        "fixed flex flex-col items-start top-0 w-[360px] h-[100vh] overflow-y-auto z-20 bg-primary-600/80 backdrop-blur-lg border-r-1 border-primary-500",
         !open && "hidden"
       )}
     >
@@ -110,9 +110,9 @@ const NavMenuItem: FC<NavMenuItemProps> = ({ icon, label, href, selected }) => {
       <Link href={href} passHref>
         <a
           className={clsx(
-            "flex flex-row items-center text-lg px-8 w-[100%] h-12 text-gray-100 fill-gray-100 relative",
+            "flex flex-row items-center text-lg px-8 w-[100%] h-12 text-primary-contrast fill-gray-100 relative",
             selected &&
-              "before:block before:absolute before:bg-blue-400 before:left-0 before:w-2 before:h-[100%]"
+              "before:block before:absolute before:bg-primary-400 before:left-0 before:w-2 before:h-[100%]"
           )}
         >
           {icon && <span className="mr-4">{icon}</span>}
