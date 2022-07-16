@@ -7,5 +7,6 @@
       "title": "Posts",
       "path": "[[workspace]]/posts"
     }
-  ]
+  ],
+  "frontMatter.templates.enabled": true
 }
