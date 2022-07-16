@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 const Hero: FC = () => {
   return (
-    <header className="flex flex-col justify-center align-center px-16 py-32 bg-hero-main border-b-1 border-primary-400 text-primary-contrast text-center overflow-hidden">
+    <header className="flex flex-col justify-center align-center px-16 py-32 bg-hero-main bg-cover bg-center border-b-1 border-primary-400 text-primary-contrast text-center overflow-hidden">
       <h1 className="text-6xl text-center relative">
         Hi, I'm
         <strong className="font-display text-secondary-500 text-center before:content-['\A'] before:whitespace-pre">
