@@ -30,6 +30,8 @@ module.exports = {
         "secondary-contrast": "#1B1B1B",
         "bg-default": "#1B1B1B",
         "bg-paper": "#2D2D2D",
+        "text-primary": "#F2F2F2",
+        "text-secondary": "rgba(242, 242, 242, 0.75)",
       },
       borderWidth: { 1: "1px" },
       backgroundImage: {
