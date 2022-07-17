@@ -51,7 +51,7 @@ const IconButton: FC<IconButtonProps> = ({
     case "primaryContrast":
     default:
       classes = clsx(
-        "text-primary-contrast hover:text-gray-300 active:text-gray-400 fill-gray-100 hover:fill-white active:fill-gray-200",
+        "text-primary-contrast hover:text-gray-300 active:text-gray-400 fill-gray-100 hover:fill-gray-300 active:fill-gray-400",
         className
       );
       break;

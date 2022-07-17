@@ -23,7 +23,7 @@ const NavBar: FC<NavBarProps> = ({ onOpenNavMenu, variant = "fab" }) => {
         className={clsx(
           "p-[12px]",
           variant === "fab" &&
-            "rounded-full bg-primary-600/80 shadow-lg backdrop-blur-lg border-1 border-primary-500"
+            "rounded-full bg-primary-500/80 hover:bg-primary-500/90 active:bg-primary-500/70 shadow-lg backdrop-blur-lg border-1 border-primary-500"
         )}
         onClick={onOpenNavMenu}
       >
