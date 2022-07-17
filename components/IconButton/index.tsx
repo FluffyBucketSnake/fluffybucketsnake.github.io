@@ -40,22 +40,11 @@ const IconButton: FC<IconButtonProps> = ({
   onClick,
   target,
 }) => {
-  let classes;
-  switch (color) {
-    case "secondaryContrast":
-      classes = clsx(
-        "text-secondary-contrast hover:text-gray-800 active:text-black fill-gray-900 hover:fill-gray-800 active:fill-black",
-        className
-      );
-      break;
-    case "primaryContrast":
-    default:
-      classes = clsx(
-        "text-primary-contrast hover:text-gray-300 active:text-gray-400 fill-gray-100 hover:fill-gray-300 active:fill-gray-400",
-        className
-      );
-      break;
-  }
+  const classes = clsx(
+    "transition duration-200",
+    getClassesForIconButtonColor(color),
+    className
+  );
 
   return href ? (
     <a
@@ -78,3 +67,13 @@ const IconButton: FC<IconButtonProps> = ({
 };
 
 export default IconButton;
+
+function getClassesForIconButtonColor(color?: IconButtonColor) {
+  switch (color) {
+    case "secondaryContrast":
+      return "text-secondary-contrast hover:text-secondary-contrast/80 active:text-secondary-contrast/60 fill-secondary-contrast hover:secondary-contrast/80 active:fill-secondary-contrast/60";
+    case "primaryContrast":
+    default:
+      return "text-primary-contrast hover:text-primary-contrast/60 active:text-primary-contrast/30 fill-primary-contrast hover:fill-primary-contrast/60 active:fill-primary-contrast/30";
+  }
+}

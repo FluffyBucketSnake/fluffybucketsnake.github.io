@@ -110,7 +110,7 @@ const NavMenuItem: FC<NavMenuItemProps> = ({ icon, label, href, selected }) => {
       <Link href={href} passHref>
         <a
           className={clsx(
-            "flex flex-row items-center text-lg px-8 w-[100%] h-12 text-primary-contrast fill-gray-100 relative",
+            "flex flex-row items-center text-lg px-8 w-[100%] h-12 text-primary-contrast fill-primary-contrast hover:text-primary-contrast/60 hover:fill-primary-contrast/60 active:text-primary-contrast/30 active:fill-primary-contrast/30 transition duration-200 relative",
             selected &&
               "before:block before:absolute before:bg-primary-400 before:left-0 before:w-2 before:h-[100%]"
           )}
