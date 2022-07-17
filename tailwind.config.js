@@ -32,7 +32,11 @@ module.exports = {
         "bg-paper": "#2D2D2D",
       },
       borderWidth: { 1: "1px" },
-      backgroundImage: { "hero-main": "url('/media/bg.png')" },
+      backgroundImage: {
+        "hero-main": "url('/media/bg.png')",
+        "primary-gradient/80":
+          "linear-gradient(170deg, rgba(48, 53, 158, 0.8), rgba(38, 40, 83, 0.8) 75%, rgba(123, 97, 255, 0.8) 150%);",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

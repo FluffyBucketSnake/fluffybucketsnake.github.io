@@ -53,7 +53,7 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
   return (
     <nav
       className={clsx(
-        "fixed flex flex-col items-start top-0 w-[360px] h-[100vh] overflow-y-auto z-20 bg-primary-600/80 backdrop-blur-lg border-r-1 border-primary-500",
+        "fixed flex flex-col items-start top-0 w-[360px] h-[100vh] overflow-y-auto z-20 bg-primary-gradient/80 backdrop-blur-lg border-r-1 border-primary-500",
         !open && "hidden"
       )}
     >
