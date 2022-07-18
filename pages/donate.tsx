@@ -5,7 +5,7 @@ import { IoLogoBitcoin } from "react-icons/io5";
 
 const DonatePage: NextPage = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="Pay me a coffee">
       <article className="max-w-[65ch] prose prose-invert">
         <header className="not-prose mb-8">
           <h1 className="font-display text-7xl text-gray-100">

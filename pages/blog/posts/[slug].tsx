@@ -15,7 +15,7 @@ type Props = {
 
 const BlogPostPage: NextPage<Props> = ({ post }) => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title={post.meta.title}>
       <article className="prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
         <header className="not-prose mb-8">
           <h1 className="font-display text-7xl text-gray-100">

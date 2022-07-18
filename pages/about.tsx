@@ -8,7 +8,7 @@ import type { NextPage } from "next";
 
 const AboutPage: NextPage = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="About me">
       <article className="prose prose-invert">
         <header className="not-prose mb-8">
           <h1 className="font-display text-7xl text-gray-100">About me</h1>

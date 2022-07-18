@@ -10,7 +10,7 @@ type Props = {
 
 const BlogPage: NextPage<Props> = ({ posts }) => {
   return (
-    <DefaultLayout>
+    <DefaultLayout title="Blog">
       <RecentPosts posts={posts} />
     </DefaultLayout>
   );

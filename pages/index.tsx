@@ -6,7 +6,10 @@ import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
 import { getAllPosts } from "lib/utils/getAllPosts";
 import type { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 import { useState } from "react";
+
+import SITE_CONFIG from "config/site.json";
 
 type Props = {
   posts: PostMetadata[];
@@ -16,6 +19,9 @@ const HomePage: NextPage<Props> = ({ posts }) => {
   const [navMenuOpen, setNavMenuOpen] = useState<boolean>(false);
   return (
     <>
+      <Head>
+        <title>{SITE_CONFIG.title}</title>
+      </Head>
       <NavBar variant="overlay" onOpenNavMenu={() => setNavMenuOpen(true)} />
       <Hero />
       <main className="p-16">
