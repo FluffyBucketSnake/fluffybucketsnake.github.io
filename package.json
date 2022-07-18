@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fluentui/svg-icons": "^1.1.166",
+    "@headlessui/react": "^1.6.6",
     "@types/jest": "^27.4.1",
     "babel-plugin-superjson-next": "^0.4.3",
     "clsx": "^1.1.1",
