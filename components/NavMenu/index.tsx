@@ -8,6 +8,7 @@ import Link from "next/link";
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 import IconButton from "components/IconButton";
+import Drawer from "components/Drawer";
 
 export type NavMenuProps = {
   open: boolean;
@@ -51,11 +52,10 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
   }, []);
 
   return (
-    <nav
-      className={clsx(
-        "fixed flex flex-col items-start top-0 w-full sm:w-[360px] h-screen overflow-y-auto z-20 bg-primary-gradient/80 backdrop-blur-lg border-r-1 border-primary-500",
-        !open && "hidden"
-      )}
+    <Drawer
+      className="fixed flex flex-col items-start top-0 w-full sm:w-[360px] h-screen overflow-y-auto z-20 bg-primary-gradient/80 backdrop-blur-lg border-r-1 border-primary-500"
+      onClose={onClose}
+      open={open}
     >
       <IconButton className="m-2 p-[12px] w-auto" onClick={onClose}>
         <CloseIcon width="24" height="24" />
@@ -91,7 +91,7 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
           </IconButton>
         </li>
       </ul>
-    </nav>
+    </Drawer>
   );
 };
 
