@@ -53,6 +53,7 @@ const NavBarMenu: FC<NavBarMenuProps> = ({ open, onClose }) => {
 
   return (
     <Drawer
+      as="nav"
       className="fixed flex flex-col items-start top-0 w-full sm:w-[360px] h-screen overflow-y-auto z-20 bg-primary-gradient/80 backdrop-blur-lg border-r-1 border-primary-500"
       onClose={onClose}
       open={open}

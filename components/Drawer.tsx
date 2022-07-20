@@ -1,14 +1,21 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { FC, Fragment, ReactNode } from "react";
+import React, { ElementType, FC, Fragment, ReactNode } from "react";
 
 export type DrawerProps = {
+  as?: ElementType<any>;
   children?: ReactNode;
   className?: string;
   onClose: () => void;
   open?: boolean;
 };
 
-const Drawer: FC<DrawerProps> = ({ children, className, onClose, open }) => {
+const Drawer: FC<DrawerProps> = ({
+  as,
+  children,
+  className,
+  onClose,
+  open,
+}) => {
   return (
     <Transition as={Fragment} show={open ?? false}>
       <Dialog onClose={onClose}>
@@ -21,7 +28,9 @@ const Drawer: FC<DrawerProps> = ({ children, className, onClose, open }) => {
           leaveFrom="opacity-100 translate-x-0"
           leaveTo="opacity-0 -translate-x-full"
         >
-          <Dialog.Panel className={className}>{children}</Dialog.Panel>
+          <Dialog.Panel as={as} className={className}>
+            {children}
+          </Dialog.Panel>
         </Transition.Child>
         <Transition.Child
           as={Fragment}
