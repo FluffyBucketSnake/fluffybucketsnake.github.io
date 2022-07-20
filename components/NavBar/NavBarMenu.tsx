@@ -10,7 +10,7 @@ import { IoLogoGithub, IoLogoLinkedin } from "react-icons/io5";
 import IconButton from "components/IconButton";
 import Drawer from "components/Drawer";
 
-export type NavMenuProps = {
+export type NavBarMenuProps = {
   open: boolean;
   onClose: () => void;
 };
@@ -44,7 +44,7 @@ const pages: PageInfo[] = [
   },
 ];
 
-const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
+const NavBarMenu: FC<NavBarMenuProps> = ({ open, onClose }) => {
   const [currentPath, setCurrentPath] = useState<string>();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
       </IconButton>
       <ul className="list py-8 w-[100%] space-y-4">
         {pages.map(({ href, icon, label }, index) => (
-          <NavMenuItem
+          <NavBarMenuItem
             key={index}
             href={href}
             icon={icon}
@@ -95,16 +95,21 @@ const NavMenu: FC<NavMenuProps> = ({ open, onClose }) => {
   );
 };
 
-export default NavMenu;
+export default NavBarMenu;
 
-type NavMenuItemProps = {
+type NavBarMenuItemProps = {
   icon: ReactNode;
   label: string;
   href: string;
   selected?: boolean;
 };
 
-const NavMenuItem: FC<NavMenuItemProps> = ({ icon, label, href, selected }) => {
+const NavBarMenuItem: FC<NavBarMenuItemProps> = ({
+  icon,
+  label,
+  href,
+  selected,
+}) => {
   return (
     <li>
       <Link href={href} passHref>
