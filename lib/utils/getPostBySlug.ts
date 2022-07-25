@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import { BASE_URL } from "lib/constants/BaseURL";
 import { PostData } from "lib/types/PostData";
 import { serialize } from "next-mdx-remote/serialize";
 import { getPostFilepathBySlug } from "./getPostFilepathBySlug";
@@ -15,7 +16,9 @@ export async function getPostBySlug(
   const { frontmatter, compiledSource } = await serialize(postSource, {
     parseFrontmatter: true,
   });
-  frontmatter && (frontmatter.slug = slug);
+  frontmatter &&
+    (frontmatter.slug = slug) &&
+    (frontmatter.url = `${BASE_URL}/posts/${slug}`);
   if (!isPostMetadata(frontmatter)) {
     throw Error("The front matter of this post is invalid.");
   }
