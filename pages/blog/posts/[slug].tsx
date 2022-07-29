@@ -1,3 +1,4 @@
+import PostNavigation from "components/PostNavigation";
 import DefaultLayout from "layouts/DefaultLayout";
 import { PostData } from "lib/types/PostData";
 import { PostMetadata } from "lib/types/PostMetadata";
@@ -33,25 +34,10 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
         <main>
           <MDXRemote compiledSource={post.content} />
         </main>
-        <footer>
-          <nav>
-            {previousPost && (
-              <Link href={previousPost.url} passHref>
-                <a>
-                  <span>Previous post</span>
-                  <strong>{previousPost.title}</strong>
-                </a>
-              </Link>
-            )}
-            {nextPost && (
-              <Link href={nextPost.url} passHref>
-                <a>
-                  <span>Next post</span>
-                  <strong>{nextPost.title}</strong>
-                </a>
-              </Link>
-            )}
-          </nav>
+        <footer className="not-prose">
+          {(previousPost || nextPost) && (
+            <PostNavigation {...{ previousPost, nextPost }} />
+          )}
         </footer>
       </article>
     </DefaultLayout>
