@@ -18,7 +18,7 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ children, title }) => {
         <title>{actualTitle}</title>
       </Head>
       <NavBar />
-      <main className="mt-[66px] p-16 pt-0">{children}</main>
+      <main className="mt-[66px] p-16 pt-0 overflow-hidden">{children}</main>
       <Footer />
     </>
   );
