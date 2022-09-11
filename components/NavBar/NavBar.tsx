@@ -20,7 +20,7 @@ const NavBar: FC<NavBarProps> = ({ variant = "fab" }) => {
     <>
       <nav
         className={clsx(
-          "p-2 z-10",
+          "p-4 z-10",
           variant === "overlay" && "absolute",
           variant === "fab" && "fixed"
         )}
