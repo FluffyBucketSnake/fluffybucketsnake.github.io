@@ -3,6 +3,7 @@ import { Transition } from "@headlessui/react";
 import IconButton from "components/IconButton";
 import PostNavigation from "components/PostNavigation";
 import DefaultLayout from "layouts/DefaultLayout";
+import { ScrollDirection, useScrollWatcher } from "lib/hooks/useScrollWatcher";
 import { PostData } from "lib/types/PostData";
 import { PostMetadata } from "lib/types/PostMetadata";
 import { getAllPosts } from "lib/utils/getAllPosts";
@@ -25,16 +26,7 @@ type Props = {
 
 const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
   const postContentRef = useRef<HTMLElement>(null);
-  const [showScrollBack, setShowScrollBack] = useState(false);
-
-  useEffect(() => {
-    const callback = () => {
-      const postContent = postContentRef.current!;
-      setShowScrollBack(postContent.getBoundingClientRect().top < 0);
-    };
-    window.addEventListener("scroll", callback);
-    return () => window.removeEventListener("scroll", callback);
-  });
+  const showScrollBack = useScrollWatcher(postContentRef, ScrollDirection.Top);
 
   return (
     <DefaultLayout title={post.meta.title}>
