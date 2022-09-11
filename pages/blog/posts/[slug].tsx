@@ -1,4 +1,5 @@
 import ChevronUpIcon from "@fluentui/svg-icons/icons/chevron_up_24_regular.svg";
+import { Transition } from "@headlessui/react";
 import IconButton from "components/IconButton";
 import PostNavigation from "components/PostNavigation";
 import DefaultLayout from "layouts/DefaultLayout";
@@ -10,6 +11,7 @@ import { getPostMetadataBySlug } from "lib/utils/getPostMetadataBySlug";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 type Params = {
   slug: string;
@@ -22,6 +24,18 @@ type Props = {
 };
 
 const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
+  const postContentRef = useRef<HTMLElement>(null);
+  const [showScrollBack, setShowScrollBack] = useState(false);
+
+  useEffect(() => {
+    const callback = () => {
+      const postContent = postContentRef.current!;
+      setShowScrollBack(postContent.getBoundingClientRect().top < 0);
+    };
+    window.addEventListener("scroll", callback);
+    return () => window.removeEventListener("scroll", callback);
+  });
+
   return (
     <DefaultLayout title={post.meta.title}>
       <article id="post">
@@ -33,13 +47,25 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
             {post.meta.description}
           </h2>
         </header>
-        <main className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
+        <main
+          ref={postContentRef}
+          className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto"
+        >
           <MDXRemote compiledSource={post.content} />
-          <nav className="not-prose sticky bottom-4 right-4 w-min ml-[100%]">
+          <Transition
+            className="not-prose sticky bottom-4 right-4 w-min ml-[100%] transition-all duration-200"
+            as="nav"
+            show={showScrollBack}
+            enter=""
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
+          >
             <IconButton variant="filled" color="primary" fluent href="#post">
               <ChevronUpIcon />
             </IconButton>
-          </nav>
+          </Transition>
         </main>
         <footer>
           {(previousPost || nextPost) && (
