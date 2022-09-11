@@ -26,11 +26,9 @@ const NavBar: FC<NavBarProps> = ({ variant = "fab" }) => {
         )}
       >
         <IconButton
-          className={clsx(
-            "p-[12px]",
-            variant === "fab" &&
-              "rounded-full bg-primary-500/80 hover:bg-primary-500/90 active:bg-primary-500/70 shadow-lg backdrop-blur-lg border-1 border-primary-500"
-          )}
+          variant={variant === "fab" ? "filled" : "text"}
+          color={variant === "fab" ? "primary" : "primaryContrast"}
+          fluent
           onClick={openMenu}
         >
           <NavigationIcon width="24" height="24" />

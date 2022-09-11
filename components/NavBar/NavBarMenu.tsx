@@ -58,7 +58,7 @@ const NavBarMenu: FC<NavBarMenuProps> = ({ open, onClose }) => {
       onClose={onClose}
       open={open}
     >
-      <IconButton className="m-2 p-[12px] w-auto" onClick={onClose}>
+      <IconButton className="m-2 w-auto" onClick={onClose}>
         <CloseIcon width="24" height="24" />
       </IconButton>
       <ul className="list py-8 w-[100%] space-y-4">
@@ -78,6 +78,7 @@ const NavBarMenu: FC<NavBarMenuProps> = ({ open, onClose }) => {
             href="https://github.com/fluffybucketsnake"
             rel="noopener noreferrer"
             target="_blank"
+            packed
           >
             <IoLogoGithub size={32} />
           </IconButton>
@@ -87,6 +88,7 @@ const NavBarMenu: FC<NavBarMenuProps> = ({ open, onClose }) => {
             href="https://www.linkedin.com/in/fluffybucketsnake-1379/"
             target="_blank"
             rel="noopener noreferrer"
+            packed
           >
             <IoLogoLinkedin size={32} />
           </IconButton>
