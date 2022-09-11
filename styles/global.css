@@ -10,7 +10,10 @@ body {
 }
 
 #__next {
-  @apply flex flex-col min-h-screen relative;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 @layer components {
