@@ -45,7 +45,7 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
         >
           <MDXRemote compiledSource={post.content} />
           <Transition
-            className="not-prose sticky bottom-4 right-4 w-min ml-[100%] transition-all duration-200"
+            className="not-prose sticky bottom-4 ml-[100%] w-min transition-all duration-200"
             as="nav"
             show={showScrollBack}
             enter=""
