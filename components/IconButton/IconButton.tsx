@@ -4,6 +4,7 @@ import React, {
   HTMLAttributeAnchorTarget,
   MouseEventHandler,
   ReactNode,
+  RefObject,
 } from "react";
 
 export type IconButtonColor =
@@ -38,39 +39,47 @@ export type ButtonIconButtonProps = {
 export type IconButtonProps = BaseIconButtonProps &
   (AnchorIconButtonProps | ButtonIconButtonProps);
 
-const IconButton: FC<IconButtonProps> = ({
-  children,
-  className,
-  color,
-  fluent,
-  href,
-  rel,
-  onClick,
-  packed,
-  target,
-  variant,
-}) => {
-  const classes = computeClasses(variant, color, fluent, packed, className);
+const IconButton = React.forwardRef<
+  HTMLAnchorElement | HTMLButtonElement,
+  IconButtonProps
+>(
+  (
+    {
+      children,
+      className,
+      color,
+      fluent,
+      href,
+      rel,
+      onClick,
+      packed,
+      target,
+      variant,
+    },
+    ref
+  ) => {
+    const classes = computeClasses(variant, color, fluent, packed, className);
 
-  return href ? (
-    <a
-      href={href}
-      rel={rel}
-      target={target}
-      className={classes}
-      onClick={onClick as MouseEventHandler<HTMLAnchorElement>}
-    >
-      {children}
-    </a>
-  ) : (
-    <button
-      className={classes}
-      onClick={onClick as MouseEventHandler<HTMLButtonElement>}
-    >
-      {children}
-    </button>
-  );
-};
+    return href ? (
+      <a
+        ref={ref as RefObject<HTMLAnchorElement>}
+        className={classes}
+        {...{ href, rel, target }}
+        onClick={onClick as MouseEventHandler<HTMLAnchorElement>}
+      >
+        {children}
+      </a>
+    ) : (
+      <button
+        ref={ref as RefObject<HTMLButtonElement>}
+        className={classes}
+        onClick={onClick as MouseEventHandler<HTMLButtonElement>}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
 export default IconButton;
 

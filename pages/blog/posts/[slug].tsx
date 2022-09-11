@@ -46,17 +46,19 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
           <MDXRemote compiledSource={post.content} />
           <Transition
             className="not-prose sticky bottom-4 ml-[100%] w-min transition-all duration-200"
-            as="nav"
+            as={IconButton}
             show={showScrollBack}
             enter=""
             enterFrom="opacity-0 translate-y-1"
             enterTo="opacity-100 translate-y-0"
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
+            variant="filled"
+            color="primary"
+            fluent
+            href="#post"
           >
-            <IconButton variant="filled" color="primary" fluent href="#post">
-              <ChevronUpIcon />
-            </IconButton>
+            <ChevronUpIcon />
           </Transition>
         </main>
         <footer>
