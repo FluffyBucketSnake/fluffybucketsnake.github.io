@@ -1,3 +1,5 @@
+import ChevronUpIcon from "@fluentui/svg-icons/icons/chevron_up_24_regular.svg";
+import IconButton from "components/IconButton";
 import PostNavigation from "components/PostNavigation";
 import DefaultLayout from "layouts/DefaultLayout";
 import { PostData } from "lib/types/PostData";
@@ -22,7 +24,7 @@ type Props = {
 const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
   return (
     <DefaultLayout title={post.meta.title}>
-      <article>
+      <article id="post">
         <header className="mb-8">
           <h1 className="font-display text-7xl text-gray-100">
             {post.meta.title}
@@ -31,8 +33,13 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
             {post.meta.description}
           </h2>
         </header>
-        <main className="prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
+        <main className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
           <MDXRemote compiledSource={post.content} />
+          <nav className="not-prose sticky bottom-4 right-4 w-min ml-[100%]">
+            <IconButton variant="filled" color="primary" fluent href="#post">
+              <ChevronUpIcon />
+            </IconButton>
+          </nav>
         </main>
         <footer>
           {(previousPost || nextPost) && (
