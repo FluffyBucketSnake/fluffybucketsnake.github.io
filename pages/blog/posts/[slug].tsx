@@ -22,8 +22,8 @@ type Props = {
 const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
   return (
     <DefaultLayout title={post.meta.title}>
-      <article className="prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
-        <header className="not-prose mb-8">
+      <article>
+        <header className="mb-8">
           <h1 className="font-display text-7xl text-gray-100">
             {post.meta.title}
           </h1>
@@ -31,10 +31,10 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
             {post.meta.description}
           </h2>
         </header>
-        <main>
+        <main className="prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto">
           <MDXRemote compiledSource={post.content} />
         </main>
-        <footer className="not-prose">
+        <footer>
           {(previousPost || nextPost) && (
             <PostNavigation {...{ previousPost, nextPost }} />
           )}
@@ -49,7 +49,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
 ) => {
   const { slug } = context.params!;
   const post = await getPostBySlug(slug);
-  console.log(post);
   const nextPost =
     post?.meta.next != null
       ? await getPostMetadataBySlug(post.meta.next).then(throwOnNullish)
