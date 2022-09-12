@@ -13,7 +13,7 @@ const PostNavigation: FC<PostNavigationProps> = ({
   nextPost,
 }) => {
   return (
-    <nav className="flex flex-col sm:flex-row w-full justify-between">
+    <nav className="flex flex-col gap-8 sm:flex-row w-full justify-between">
       <PostNavigationLink
         label="Previous post"
         side="left"
