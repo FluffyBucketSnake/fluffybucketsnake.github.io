@@ -9,6 +9,8 @@ import Head from "next/head";
 import { useState } from "react";
 
 import SITE_CONFIG from "config/site.json";
+import WebsiteImageURL from "lib/constants/WebsiteImageURL";
+import { BASE_URL } from "lib/constants/BaseURL";
 
 type Props = {
   posts: PostMetadata[];
@@ -19,6 +21,10 @@ const HomePage: NextPage<Props> = ({ posts }) => {
     <>
       <Head>
         <title>{SITE_CONFIG.title}</title>
+        <meta property="og:title" content={SITE_CONFIG.title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={WebsiteImageURL} />
+        <meta property="og:url" content={BASE_URL} />
       </Head>
       <NavBar variant="overlay" />
       <Hero />

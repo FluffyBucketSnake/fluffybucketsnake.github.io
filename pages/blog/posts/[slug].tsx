@@ -4,6 +4,7 @@ import IconButton from "components/IconButton";
 import PostNavigation from "components/PostNavigation";
 import { format as formatDate } from "date-fns";
 import DefaultLayout from "layouts/DefaultLayout";
+import WebsiteImageURL from "lib/constants/WebsiteImageURL";
 import { ScrollDirection, useScrollWatcher } from "lib/hooks/useScrollWatcher";
 import { PostData } from "lib/types/PostData";
 import { PostMetadata } from "lib/types/PostMetadata";
@@ -12,6 +13,7 @@ import { getPostBySlug } from "lib/utils/getPostBySlug";
 import { getPostMetadataBySlug } from "lib/utils/getPostMetadataBySlug";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { MDXRemote } from "next-mdx-remote";
+import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -31,6 +33,13 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
 
   return (
     <DefaultLayout title={post.meta.title}>
+      <Head>
+        <meta property="og:title" content={post.meta.title} />
+        <meta property="og:type" content="article" />
+        <meta property="og:description" content={post.meta.description} />
+        <meta property="og:image" content={WebsiteImageURL} />
+        <meta property="og:url" content={post.meta.url} />
+      </Head>
       <article id="post">
         <header className="mb-8">
           <h1 className="font-display text-7xl text-gray-100">
