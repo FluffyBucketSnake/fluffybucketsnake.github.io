@@ -39,13 +39,15 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
             {post.meta.description}
           </h2>
         </header>
+        <div>
         <main
           ref={postContentRef}
           className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto"
         >
           <MDXRemote compiledSource={post.content} />
+          </main>
           <Transition
-            className="not-prose sticky bottom-4 ml-[100%] w-min transition-all duration-200"
+            className="sticky bottom-4 ml-[100%] w-min transition-all duration-200"
             as={IconButton}
             show={showScrollBack}
             enter=""
@@ -60,7 +62,7 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
           >
             <ChevronUpIcon />
           </Transition>
-        </main>
+        </div>
         <footer>
           {(previousPost || nextPost) && (
             <PostNavigation {...{ previousPost, nextPost }} />
