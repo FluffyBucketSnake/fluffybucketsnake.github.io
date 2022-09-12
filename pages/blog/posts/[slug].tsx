@@ -2,6 +2,7 @@ import ChevronUpIcon from "@fluentui/svg-icons/icons/chevron_up_24_regular.svg";
 import { Transition } from "@headlessui/react";
 import IconButton from "components/IconButton";
 import PostNavigation from "components/PostNavigation";
+import { format as formatDate } from "date-fns";
 import DefaultLayout from "layouts/DefaultLayout";
 import { ScrollDirection, useScrollWatcher } from "lib/hooks/useScrollWatcher";
 import { PostData } from "lib/types/PostData";
@@ -38,13 +39,22 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
           <h2 className="font-light text-5xl text-gray-100/75">
             {post.meta.description}
           </h2>
+          <span className="text-base text-text-primary">
+            Posted at{" "}
+            <time
+              className="font-semibold"
+              dateTime={post.meta.date.toISOString()}
+            >
+              {formatDate(post.meta.date, "PPP")}
+            </time>
+          </span>
         </header>
         <div>
-        <main
-          ref={postContentRef}
-          className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto"
-        >
-          <MDXRemote compiledSource={post.content} />
+          <main
+            ref={postContentRef}
+            className="flex-col prose prose-lg prose-invert prose-h3:text-4xl prose-h4:text-3xl prose-h5:text-2xl prose-h6:text-xl prose-h6:text-bold prose-p:text-gray-100 prose-strong:text-secondary-400 prose-code:text-secondary-400 prose-pre:text-lg prose-img:mx-auto"
+          >
+            <MDXRemote compiledSource={post.content} />
           </main>
           <Transition
             className="sticky bottom-4 ml-[100%] w-min transition-all duration-200"
