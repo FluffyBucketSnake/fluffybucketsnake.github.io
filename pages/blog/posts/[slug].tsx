@@ -14,8 +14,7 @@ import { getPostMetadataBySlug } from "lib/utils/getPostMetadataBySlug";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { MDXRemote } from "next-mdx-remote";
 import Head from "next/head";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 type Params = {
   slug: string;

@@ -1,5 +1,4 @@
 import { PostMetadata } from "lib/types/PostMetadata";
-import Link from "next/link";
 import React, { FC } from "react";
 import PostNavigationLink from "./PostNavigationLink";
 
