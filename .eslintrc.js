@@ -5,8 +5,6 @@ module.exports = {
     node: true,
   },
   extends: [
-    "plugin:react/recommended",
-    "standard",
     "next/core-web-vitals",
     "prettier",
   ],
@@ -18,6 +16,6 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["@typescript-eslint"],
   rules: {},
 };
