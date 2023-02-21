@@ -1,6 +1,7 @@
 import ChevronUpIcon from "@fluentui/svg-icons/icons/chevron_up_24_regular.svg";
 import { Transition } from "@headlessui/react";
 import IconButton from "components/IconButton";
+import PostCommentSection from "components/organisms/PostCommentSection";
 import PostNavigation from "components/PostNavigation";
 import { format as formatDate } from "date-fns";
 import DefaultLayout from "layouts/DefaultLayout";
@@ -39,7 +40,7 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
         <meta property="og:image" content={WebsiteImageURL} />
         <meta property="og:url" content={post.meta.url} />
       </Head>
-      <article id="post">
+      <article id="post" className="mb-16">
         <header className="mb-8">
           <h1 className="font-display text-7xl text-gray-100">
             {post.meta.title}
@@ -87,6 +88,7 @@ const BlogPostPage: NextPage<Props> = ({ post, previousPost, nextPost }) => {
           )}
         </footer>
       </article>
+      <PostCommentSection post={post} />
     </DefaultLayout>
   );
 };
