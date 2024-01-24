@@ -7,6 +7,10 @@ const nextConfig = {
       issuer: { and: [/\.(js|ts|md)x?$/] },
       use: ["@svgr/webpack"],
     });
+    config.module.rules.push({
+      test: /\.(?:vert|frag)$/i,
+      type: "asset/source",
+    });
     return config;
   },
 };
