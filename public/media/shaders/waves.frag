@@ -33,12 +33,12 @@ const gradient_step_t GRADIENT_STEPS[3] =
                        gradient_step_t(0.52, fromhex(0x262853)),
                        gradient_step_t(1.64, fromhex(0x7B61FF)));
 
-const wave_t WAVES[3] = wave_t[3](wave_t(1.13, 0.005, 0.03, 0.29, 0.25),
-                                  wave_t(2.126, 0.007, 0.61, 0.26, 0.17),
-                                  wave_t(5.87, 0.013, 0.73, 0.24, 0.23));
-const wave_t WAVELINES[3] = wave_t[3](wave_t(0.91, 0.027, 0.14, 0.15, 0.819),
-                                      wave_t(1.11, 0.035, 0.03, 0.11, 0.79),
-                                      wave_t(1.23, 0.041, 0.89, 0.08, 0.81));
+const wave_t WAVES[3] = wave_t[3](wave_t(1.13, 0.005, 0.03, 0.14, 0.25),
+                                  wave_t(2.126, 0.007, 0.61, 0.13, 0.17),
+                                  wave_t(5.87, 0.013, 0.73, 0.12, 0.23));
+const wave_t WAVELINES[3] = wave_t[3](wave_t(0.91, 0.027, 0.14, 0.07, 0.819),
+                                      wave_t(1.11, 0.035, 0.03, 0.05, 0.79),
+                                      wave_t(1.23, 0.041, 0.89, 0.04, 0.81));
 
 const vec3 WAVE_COLOR = fromhex(0x7B7EBE);
 const float WAVE_ALPHA_BASE = 0.07;
