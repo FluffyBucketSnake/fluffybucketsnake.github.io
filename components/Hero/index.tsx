@@ -36,7 +36,7 @@ const Hero: FC = () => {
         I'm full-stack web developer and a game designer. I'm also passionate
         about gaming, science, technology and art.
       </p>
-      {error && (
+      {error != null && (
         <>
           <IconButton
             className="absolute right-4 top-4 z-10"
