@@ -10,7 +10,8 @@ import React, {
 export type IconButtonColor =
   | "primary"
   | "primaryContrast"
-  | "secondaryContrast";
+  | "secondaryContrast"
+  | "errorDetails";
 export type IconButtonVariant = "text" | "filled";
 
 export type BaseIconButtonProps = {
@@ -56,7 +57,7 @@ const IconButton = React.forwardRef<
       target,
       variant,
     },
-    ref
+    ref,
   ) => {
     const classes = computeClasses(variant, color, fluent, packed, className);
 
@@ -78,7 +79,7 @@ const IconButton = React.forwardRef<
         {children}
       </button>
     );
-  }
+  },
 );
 
 export default IconButton;
@@ -88,23 +89,26 @@ function computeClasses(
   color?: IconButtonColor,
   fluent?: boolean,
   packed: boolean = false,
-  className?: string
+  className?: string,
 ) {
   return clsx(
     "flex transition duration-200 rounded-full",
     computeColorClasses(variant, color, fluent),
     !packed && "p-[12px]",
-    className
+    className,
   );
 }
 
 function computeColorClasses(
   variant: IconButtonVariant = "text",
   color: IconButtonColor = "primaryContrast",
-  fluent: boolean = false
+  fluent: boolean = false,
 ) {
   if (variant === "filled" && color === "primary" && fluent) {
     return "bg-primary-500/80 hover:bg-primary-500/90 active:bg-primary-500/70 shadow-lg backdrop-blur-lg border-1 border-primary-500 text-primary-contrast hover:text-primary-contrast/60 active:text-primary-contrast/30 fill-primary-contrast hover:fill-primary-contrast/60 active:fill-primary-contrast/30";
+  }
+  if (variant === "filled" && color === "errorDetails") {
+    return "border-1 border-divider bg-bg-paper hover:bg-bg-default fill-error hover:fill-error/80 active:fill-error/40";
   }
   if (variant === "text" && color === "primaryContrast") {
     return "text-primary-contrast hover:text-primary-contrast/60 active:text-primary-contrast/30 fill-primary-contrast hover:fill-primary-contrast/60 active:fill-primary-contrast/30";
@@ -113,6 +117,6 @@ function computeColorClasses(
     return "text-secondary-contrast hover:text-secondary-contrast/80 active:text-secondary-contrast/60 fill-secondary-contrast hover:secondary-contrast/80 active:fill-secondary-contrast/60";
   }
   throw new Error(
-    `Unimplemented style combination: (${variant}, ${color}, ${fluent})`
+    `Unimplemented style combination: (${variant}, ${color}, ${fluent})`,
   );
 }
