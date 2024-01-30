@@ -1,4 +1,5 @@
 import VERT_SRC from "@/shaders/basic.vert";
+import { WebGL2ShaderCompilationError } from "lib/errors/webgl2";
 import { SimpleVertex2D } from "lib/types/geometry";
 import { createQuadStrip2D } from "lib/utils/geometry";
 
@@ -144,9 +145,7 @@ function createWebGL2Shader(
     gl.compileShader(shader);
     const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
     if (!success) {
-      throw new Error(
-        `Failed to compile shader:\n${gl.getShaderInfoLog(shader)}`,
-      );
+      throw new WebGL2ShaderCompilationError(src, gl.getShaderInfoLog(shader)!);
     }
     return shader;
   } catch (err) {

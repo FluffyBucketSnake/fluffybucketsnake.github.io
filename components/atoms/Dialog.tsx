@@ -25,7 +25,7 @@ const Dialog: FC<DrawerProps> = ({
         as={as}
         className={clsx(
           className,
-          "fixed inset-0 z-50 bg-bg-paper w-screen h-screen flex flex-col",
+          "fixed inset-0 z-50 bg-bg-paper w-screen h-svh flex flex-col",
         )}
       >
         <header className="flex-0 flex shadow-lg p-4 bg-bg-paper">
