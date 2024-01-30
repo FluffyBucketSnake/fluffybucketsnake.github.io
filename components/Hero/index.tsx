@@ -3,6 +3,7 @@ import Dialog from "components/atoms/Dialog";
 import IconButton from "components/IconButton";
 import { wavesEffect } from "lib/effects/wavesEffect";
 import React, { FC, useEffect, useRef, useState } from "react";
+import RenderErrorDialogContent from "./RenderErrorDialogContent";
 
 const Hero: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -47,10 +48,7 @@ const Hero: FC = () => {
             <IconError width={24} height={24} />
           </IconButton>
           <Dialog open={errorDialogOpen} onClose={closeErrorDialog}>
-            <p className="text-2xl">
-              An error has occurred while rendering the banner. Details:
-            </p>
-            <pre className="flex-1 border-1 border-divider rounded-lg p-4 bg-bg-default text-error overflow-auto">{`${error}`}</pre>
+            <RenderErrorDialogContent error={error} />
           </Dialog>
         </>
       )}
