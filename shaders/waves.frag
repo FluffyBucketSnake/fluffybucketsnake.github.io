@@ -52,8 +52,9 @@ vec3 background(vec2 uv, float time) {
   float t = dot(uv, n);
   vec3 color = GRADIENT_STEPS[0].color;
   for (int i = 1; i < GRADIENT_STEPS.length(); i++) {
-    color = mix(color, GRADIENT_STEPS[i].color,
-                smoothstep(GRADIENT_STEPS[i - 1].t, GRADIENT_STEPS[i].t, t));
+    gradient_step_t start = GRADIENT_STEPS[i - 1];
+    gradient_step_t end = GRADIENT_STEPS[i];
+    color = mix(color, end.color, smoothstep(start.t, end.t, t));
   }
   return color;
 }
