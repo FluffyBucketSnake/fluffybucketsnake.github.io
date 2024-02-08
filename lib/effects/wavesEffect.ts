@@ -1,25 +1,22 @@
 import FRAG_SRC from "@/shaders/waves.frag";
 import { WebGL2Renderer } from "lib/renderers/webgl2";
 import { SimpleLoop } from "lib/utils/interactive";
-import { RefObject } from "react";
+import { IRenderEffect } from "./base";
 
-export function wavesEffect(
-  canvas: RefObject<HTMLCanvasElement>,
-  setError: (error: unknown) => void,
-) {
-  return () => {
-    if (canvas.current == null) {
-      return;
-    }
-    try {
-      const renderer = new WebGL2Renderer(canvas.current!, FRAG_SRC);
-      const loop = new SimpleLoop((time) => renderer.renderFrame(time));
-      return () => {
-        loop.stop();
-        renderer.dispose();
-      };
-    } catch (err) {
-      setError(err);
-    }
+export function wavesEffect(canvas: HTMLCanvasElement): IRenderEffect {
+  let renderer = new WebGL2Renderer(canvas, FRAG_SRC);
+  const loop = new SimpleLoop((time) => renderer.renderFrame(time));
+
+  const updateCanvas = (canvas: HTMLCanvasElement) => {
+    renderer = new WebGL2Renderer(canvas, FRAG_SRC);
   };
+  const refreshResolution = () => {
+    renderer.refreshResolution();
+  };
+  const dispose = () => {
+    loop.stop();
+    renderer.dispose();
+  };
+
+  return { updateCanvas, refreshResolution, dispose };
 }

@@ -2,15 +2,15 @@ import IconError from "@fluentui/svg-icons/icons/error_circle_24_regular.svg";
 import Dialog from "components/atoms/Dialog";
 import IconButton from "components/IconButton";
 import { wavesEffect } from "lib/effects/wavesEffect";
+import { useRenderEffect } from "lib/hooks/useRenderEffect";
 import React, { FC, useEffect, useRef, useState } from "react";
 import RenderErrorDialogContent from "./RenderErrorDialogContent";
 
 const Hero: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [error, setError] = useState<unknown>();
+  const { error } = useRenderEffect(wavesEffect, canvasRef);
   const [errorDialogOpen, setErrorDialogOpen] = useState<boolean>(false);
 
-  useEffect(wavesEffect(canvasRef, setError), [canvasRef.current]);
   useEffect(() => {
     if (error == null) return;
     console.error(error);

@@ -48,6 +48,8 @@ export class WebGL2Renderer {
     this.gl.useProgram(this.program);
 
     this.gl.clearColor(0, 0, 0, 1);
+
+    this.refreshResolution();
   }
 
   public refreshResolution() {
@@ -62,8 +64,6 @@ export class WebGL2Renderer {
   }
 
   public renderFrame(time: number) {
-    this.refreshResolution();
-
     this.gl.uniform1f(this.uTimeLocation, time);
 
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
