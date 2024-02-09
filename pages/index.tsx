@@ -1,12 +1,11 @@
 import Footer from "components/Footer";
-import Hero from "components/Hero";
+import Hero from "components/organisms/Hero";
 import NavBar from "components/NavBar";
 import RecentPosts from "components/RecentPosts";
 import { PostMetadata } from "lib/types/PostMetadata";
 import { getAllPosts } from "lib/utils/getAllPosts";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
 
 import SITE_CONFIG from "config/site.json";
 import WebsiteImageURL from "lib/constants/WebsiteImageURL";

@@ -1,12 +1,21 @@
 import CodeBlock from "components/atoms/CodeBlock";
+import Dialog from "components/atoms/Dialog";
 import { WebGL2ShaderCompilationError } from "lib/errors/webgl2";
 import { FC } from "react";
 
 export type Props = {
   error: unknown;
+  open: boolean;
+  onClose: () => void;
 };
 
-const RenderErrorDialogContent: FC<Props> = ({ error }) => {
+export default (({ error, open, onClose }) => (
+  <Dialog open={open} onClose={onClose}>
+    {open && Content(error)}
+  </Dialog>
+)) as FC<Props>;
+
+function Content(error: unknown) {
   if (error instanceof WebGL2ShaderCompilationError) {
     return (
       <>
@@ -43,6 +52,4 @@ const RenderErrorDialogContent: FC<Props> = ({ error }) => {
       <pre className="flex-1 border-1 border-divider rounded-lg p-4 bg-bg-default text-error overflow-auto">{`${error}`}</pre>
     </>
   );
-};
-
-export default RenderErrorDialogContent;
+}
