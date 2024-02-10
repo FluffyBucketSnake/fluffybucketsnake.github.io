@@ -11,9 +11,7 @@ export default (() => (
       absolute
       className="inset-0 w-full h-full"
       effect={wavesEffect}
-      fallback={() => (
-        <Image src={DefaultBackground} alt="Hero background" unoptimized />
-      )}
+      fallback={() => <Image src={DefaultBackground} alt="Hero background" />}
     />
     <h1 className="text-6xl text-center relative z-10">
       Hi, I'm
