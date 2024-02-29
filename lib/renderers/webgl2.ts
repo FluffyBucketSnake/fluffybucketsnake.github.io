@@ -1,4 +1,5 @@
 import VERT_SRC from "@/shaders/basic.vert";
+import { CanvasBlockedError } from "lib/errors/canvasBlocked";
 import { WebGL2ShaderCompilationError } from "lib/errors/webgl2";
 import { SimpleVertex2D } from "lib/types/geometry";
 import { createQuadStrip2D } from "lib/utils/geometry";
@@ -101,7 +102,9 @@ function createWebGL2Program(
 
   try {
     gl.linkProgram(program);
-    const success = gl.getProgramParameter(program, gl.LINK_STATUS);
+    const success = ensureGlBoolean(
+      gl.getProgramParameter(program, gl.LINK_STATUS),
+    );
     if (!success) {
       throw new Error(
         `Failed to link program:\n${gl.getProgramInfoLog(program)}`,
@@ -143,7 +146,9 @@ function createWebGL2Shader(
   try {
     gl.shaderSource(shader, src);
     gl.compileShader(shader);
-    const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+    const success = ensureGlBoolean(
+      gl.getShaderParameter(shader, gl.COMPILE_STATUS),
+    );
     if (!success) {
       throw new WebGL2ShaderCompilationError(src, gl.getShaderInfoLog(shader)!);
     }
@@ -183,4 +188,11 @@ function createBasicWebGL2VAO(
   gl.enableVertexAttribArray(positionAttribute);
   gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
   return vao;
+}
+
+function ensureGlBoolean(value: any): boolean {
+  if (value == null) {
+    throw new CanvasBlockedError();
+  }
+  return value;
 }
