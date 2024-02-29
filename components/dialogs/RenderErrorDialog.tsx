@@ -1,5 +1,6 @@
 import CodeBlock from "components/atoms/CodeBlock";
 import Dialog from "components/atoms/Dialog";
+import { CanvasBlockedError } from "lib/errors/canvasBlocked";
 import { WebGL2ShaderCompilationError } from "lib/errors/webgl2";
 import { FC } from "react";
 
@@ -16,6 +17,9 @@ export default (({ error, open, onClose }) => (
 )) as FC<Props>;
 
 function Content(error: unknown) {
+  if (error instanceof CanvasBlockedError) {
+    return <p className="text-2xl">{error.message}</p>;
+  }
   if (error instanceof WebGL2ShaderCompilationError) {
     return (
       <>
