@@ -12,7 +12,12 @@ export default (() => (
       className="inset-0 w-full h-full"
       effect={wavesEffect}
       fallback={() => (
-        <Image layout="fill" src={DefaultBackground} alt="Hero background" />
+        <Image
+          layout="fill"
+          objectFit="cover"
+          src={DefaultBackground}
+          alt="Hero background"
+        />
       )}
     />
     <h1 className="text-6xl text-center relative z-10">
