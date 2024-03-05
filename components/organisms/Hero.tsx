@@ -30,7 +30,7 @@ export default (() => (
       AKA <strong className="text-secondary-500">FluffyBucketSnake</strong>
     </h2>
     <p className="text-lg z-10">
-      I'm full-stack web developer and a game designer. I'm also passionate
+      I'm a software developer, as well as a game designer. I'm also passionate
       about gaming, science, technology and art.
     </p>
   </header>

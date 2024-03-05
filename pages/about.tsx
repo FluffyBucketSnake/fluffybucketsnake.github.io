@@ -18,10 +18,10 @@ const AboutPage: NextPage = () => {
         </header>
         <p>
           I'm a Brazilian software developer. What kind of software developer
-          you may ask? Pretty much any. I particularly enjoy working on
-          desktops, full stack and game projects, but I've also have developed
-          mobile apps. In my free time, aside from developing side-projects like
-          these ones, I like playing games, drawing and reading.
+          you may ask? Pretty much any. I enjoy working on a lot of software
+          projects, like low-level systems, desktop apps, full-stack services
+          and games. In particular, I am specialized in security, operating
+          system and graphics engine development.
         </p>
         <p>
           I'm a faster learner, having learned much of development and
@@ -37,6 +37,10 @@ const AboutPage: NextPage = () => {
           take either an user-centric approach, or a business-centric one, when
           coming up with the ideas for a project, thinking about the user's
           experience.
+        </p>
+        <p>
+          In my free time, aside from developing side-projects, I like playing
+          games, drawing and reading.
         </p>
         <section className="not-prose card mb-4">
           <header className="flex flex-row items-center mb-2 text-gray-100">
@@ -86,6 +90,9 @@ const AboutPage: NextPage = () => {
               <strong>Vulkan</strong>
             </li>
             <li>
+              <strong>Vue</strong>
+            </li>
+            <li>
               <strong>React</strong>
             </li>
             <li>
@@ -98,7 +105,6 @@ const AboutPage: NextPage = () => {
               <strong>ASP.NET Core</strong>
             </li>
             <li>React Native</li>
-            <li>Vue</li>
             <li>Godot Engine</li>
             <li>Unity3D</li>
             <li>SDL2</li>
@@ -213,14 +219,19 @@ const AboutPage: NextPage = () => {
               <strong>Game design &amp; development</strong>
             </li>
             <li>
-              <strong>UI/UX</strong>
+              <strong>Operating systems</strong>
+            </li>
+            <li>
+              <strong>Computer graphics</strong>
+            </li>
+            <li>
+              <strong>Protection &amp; security</strong>
             </li>
             <li>
               <strong>Software engineering</strong>
             </li>
-            <li>Protection &amp; Security</li>
+            <li>UI/UX</li>
             <li>Electronics &amp; Hardware</li>
-            <li>Operating systems</li>
             <li>Full stack development</li>
             <li>Low-level development</li>
             <li>Native(Desktop/Mobile) development</li>
