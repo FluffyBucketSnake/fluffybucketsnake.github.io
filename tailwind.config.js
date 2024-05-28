@@ -4,8 +4,8 @@ export default {
 	theme: {
 		fontFamily: {
 			default: ['Ubuntu', 'ui-sans-serif', 'sans-serif'],
-			mono: ['Fira Code', 'ui-monospace', 'monospace'],
-			header: ['8-BIT WONDER', 'ui-sans-serif', 'sans-serif'],
+			mono: ['"Fira Code"', 'ui-monospace', 'monospace'],
+			header: ['"8-BIT WONDER"', 'ui-sans-serif', 'sans-serif'],
 			stylized: ['Pixellari', 'ui-sans-serif', 'sans-serif']
 		},
 		extend: {
@@ -15,6 +15,7 @@ export default {
 				fg: '#f2f0e5',
 				fgInv: '#212123',
 				carbon: '#45444f',
+				acrylic: 'rgb(from #212123 r g b / 75%)',
 				matte: '#646365',
 				separator: '#646365',
 				separatorHl: '#868188',
@@ -55,6 +56,20 @@ export default {
 			},
 			backgroundImage: {
 				wavy: "url('/assets/img/bg-wavy.png')"
+			},
+			dropShadow: {
+				'2px': '2px 2px #212123',
+				'4px': '4px 4px #212123',
+				'8px': '8px 8px #212123',
+				'16px': '16px 16px #212123',
+				'32px': '32px 32px #212123C0'
+			},
+			boxShadow: {
+				'2px': '2px 2px #212123',
+				'4px': '4px 4px #212123',
+				'8px': '8px 8px #212123',
+				'16px': '16px 16px #212123',
+				'32px/A': '32px 32px #21212380'
 			}
 		}
 	},
