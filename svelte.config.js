@@ -11,10 +11,10 @@ const config = {
 	},
 	paths: {
 		base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
-	},
-	compilerOptions: {
-		runes: true
 	}
+	// compilerOptions: {
+	// 	runes: true
+	// }
 };
 
 export default config;
