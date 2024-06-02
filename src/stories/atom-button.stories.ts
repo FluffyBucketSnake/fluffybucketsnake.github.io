@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
 
-import AtomButton from '$lib/atoms/atom-button.svelte';
+import AtomButton from '$lib/components/atoms/atom-button.svelte';
 
 const meta: Meta<typeof AtomButton> = {
 	title: 'Atoms/Button',
