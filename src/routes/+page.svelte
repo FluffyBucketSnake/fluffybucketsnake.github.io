@@ -31,11 +31,11 @@
 
 {#snippet card(title: string, content: Snippet, cta: [string, string])}
 	<div
-		class="border border-carbon bg-acrylic/75 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl"
+		class="border border-carbon bg-acrylic/60 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl"
 	>
 		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{title}</h2>
 		{@render content()}
-		<AtomButton class="self-stretch" href={cta[0]} shadow>
+		<AtomButton class="self-stretch lg:self-end" href={cta[0]} shadow>
 			{cta[1]}
 			{#snippet appendIcon()}
 				<IconChevronRight />
@@ -46,7 +46,7 @@
 <section class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	{#snippet about()}
 		<main
-			class="prose prose-gray text-fg prose-strong:text-primary-200 prose-em:text-secondary-400"
+			class="prose prose-gray text-fg prose-strong:text-primary-200 prose-em:text-secondary-400 max-w-none"
 		>
 			<p>
 				I am <strong>Bruno Henrique Glowaski Morais</strong>, AKA
@@ -61,17 +61,19 @@
 	{/snippet}
 	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'])}
 </section>
-<section class="w-screen min-h-[200vh] h-[1092px] flex justify-center items-center">
+<section
+	class="w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center items-center"
+>
 	{#snippet blog()}
-		<ol class="flex flex-col items-center gap-4">
+		<ol class="lg:pb-2 flex flex-col lg:flex-row items-center gap-4 lg:overflow-x-scroll w-full">
 			{#each data.blogPosts as post (post.slug)}
 				<li>
 					<a href={post.link} class="group focus:outline-0">
 						<article
-							class="w-[240px] h-[160px] bg-matte shadow-4px group-hover:shadow-8px group-focus:shadow-8px flex flex-col p-2 gap-2 transition"
+							class="w-[240px] h-[160px] bg-matte shadow-4px group-hover:shadow-8px group-focus:shadow-8px group-active:shadow-2px flex flex-col p-2 gap-2 transition"
 						>
 							<h3
-								class="font-header text-lg leading-none group-hover:text-primary-200 group-focus:text-primary-200"
+								class="font-header text-lg leading-none group-hover:text-primary-200 group-focus:text-primary-200 group-active:text-primary-400"
 							>
 								{post.title}
 							</h3>
