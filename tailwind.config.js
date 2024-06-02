@@ -9,6 +9,7 @@ export default {
 			stylized: ['Pixellari', 'ui-sans-serif', 'sans-serif']
 		},
 		extend: {
+			typograph: { gray: { css: { '--tw-prose-body': '#F00' } } },
 			colors: {
 				darkest: '#212123',
 				lightest: '#f2f0e5',
@@ -73,5 +74,5 @@ export default {
 			}
 		}
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/typography')]
 };
