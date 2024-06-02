@@ -16,7 +16,7 @@ export default {
 				fg: '#f2f0e5',
 				fgInv: '#212123',
 				carbon: '#45444f',
-				acrylic: 'rgb(from #212123 r g b / 75%)',
+				acrylic: '#212123',
 				matte: '#646365',
 				separator: '#646365',
 				separatorHl: '#868188',
