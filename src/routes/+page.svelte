@@ -1,7 +1,17 @@
 <script lang="ts">
+	import me from '$lib/assets/me.json';
 	import background from '$lib/assets/img/bg-wavy.png';
-	import AtomButton from '$lib/atoms/atom-button.svelte';
+	import AtomButton from '$lib/components/atoms/atom-button.svelte';
+	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
+	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
+	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
 	import type { Snippet } from 'svelte';
+	import type { PageData } from './$types';
+	import { format } from 'date-fns/fp';
+
+	const formatPostDate = format('PPP');
+
+	export let data: PageData;
 </script>
 
 <figure class="fixed top-0 left-0 w-screen h-screen -z-10">
@@ -21,11 +31,16 @@
 
 {#snippet card(title: string, content: Snippet, cta: [string, string])}
 	<div
-		class="border border-carbon bg-acrylic p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl"
+		class="border border-carbon bg-acrylic/75 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl"
 	>
 		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{title}</h2>
 		{@render content()}
-		<AtomButton class="self-end" href={cta[0]} shadow>{cta[1]}</AtomButton>
+		<AtomButton class="self-stretch" href={cta[0]} shadow>
+			{cta[1]}
+			{#snippet appendIcon()}
+				<IconChevronRight />
+			{/snippet}
+		</AtomButton>
 	</div>
 {/snippet}
 <section class="w-screen min-h-screen h-[546px] flex justify-center items-center">
@@ -47,39 +62,25 @@
 	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'])}
 </section>
 <section class="w-screen min-h-[200vh] h-[1092px] flex justify-center items-center">
-	{#snippet post(title: string, link: string, date: string, description: string)}
-		<li class="w-[240px] h-[160px] bg-matte shadow-2px flex flex-col p-2 gap-2">
-			<a class="font-header text-lg leading-none" href={link}>{title}</a>
-			<span class="text-xs text-fg/75 leading-none">{date}</span>
-			<p class="text-sm">{description}</p>
-		</li>
-	{/snippet}
 	{#snippet blog()}
-		<ol class="flex flex-col gap-4">
-			{@render post(
-				'Hello Again',
-				'/post/a',
-				'September 11th, 2022',
-				"I've been away for a while, so lets talk about a bunch of small fixes and improvements, and also some new features"
-			)}
-			{@render post(
-				'Hello Again',
-				'/post/a',
-				'September 11th, 2022',
-				"I've been away for a while, so lets talk about a bunch of small fixes and improvements, and also some new features"
-			)}
-			{@render post(
-				'Hello Again',
-				'/post/a',
-				'September 11th, 2022',
-				"I've been away for a while, so lets talk about a bunch of small fixes and improvements, and also some new features"
-			)}
-			{@render post(
-				'Hello Again',
-				'/post/a',
-				'September 11th, 2022',
-				"I've been away for a while, so lets talk about a bunch of small fixes and improvements, and also some new features"
-			)}
+		<ol class="flex flex-col items-center gap-4">
+			{#each data.blogPosts as post (post.slug)}
+				<li>
+					<a href={post.link} class="group focus:outline-0">
+						<article
+							class="w-[240px] h-[160px] bg-matte shadow-4px group-hover:shadow-8px group-focus:shadow-8px flex flex-col p-2 gap-2 transition"
+						>
+							<h3
+								class="font-header text-lg leading-none group-hover:text-primary-200 group-focus:text-primary-200"
+							>
+								{post.title}
+							</h3>
+							<span class="text-xs text-fg/75 leading-none">{formatPostDate(post.date)}</span>
+							<p class="text-sm flex-1 text-ellipsis overflow-hidden">{post.description}</p>
+						</article>
+					</a>
+				</li>
+			{/each}
 		</ol>
 	{/snippet}
 	{@render card('What have I been posting', blog, ['/blog', 'Click here to see more!'])}
@@ -95,10 +96,17 @@
 		class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 	>
 		Wanna buy me a coffe? Click here!
+		{#snippet appendIcon()}
+			<IconChevronRight />
+		{/snippet}
 	</AtomButton>
 	<ul class="flex gap-4">
-		<li><a href="linkedin">icon</a></li>
-		<li><a href="github">icon</a></li>
+		<li>
+			<AtomButton variant="text" shadow="8px" href={me.links.linkedin}><LogoLinkedIn /></AtomButton>
+		</li>
+		<li>
+			<AtomButton variant="text" shadow="8px" href={me.links.github}><LogoGithub /></AtomButton>
+		</li>
 	</ul>
 	<span class="mt-8 font-stylized drop-shadow-4px">Developed by me :)</span>
 	<span class="mt-1 font-stylized text-xs drop-shadow-4px">Powered by SvelteKit & Tailwind CSS</span
