@@ -1,10 +1,12 @@
 <script lang="ts" context="module">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
 	export interface ISharedProps {
 		color?: 'primary' | 'secondary';
 		shadow?: boolean | '8px';
 		variant?: 'filled' | 'text';
+		appendIcon?: Snippet;
 	}
 
 	export interface ILinkVariantProps extends HTMLAnchorAttributes {
@@ -18,7 +20,11 @@
 	export type Props = ISharedProps & (ILinkVariantProps | IActionVariantProps);
 
 	const style = {
-		base: 'font-stylized align-middle text-center transition duration-75 ease-in-out focus:outline-0',
+		base: 'font-stylized align-middle text-center transition duration-75 ease-in-out focus:outline-0 grid gap-2 items-center justify-center',
+		layout: {
+			none: 'grid-cols-[1fr]',
+			append: 'grid-cols-[1fr_auto]'
+		},
 		variants: {
 			filled: {
 				base: 'border p-2',
@@ -53,29 +59,33 @@
 		color = 'primary',
 		shadow = false,
 		variant = 'filled',
+		appendIcon,
 		...attrs
 	}: Props = $props();
 
 	const useDropShadow = $derived(variant == 'text');
 	const classes = $derived(
-		`${style.base} ${style.variants[variant].base} ${style.variants[variant][color]} ${shadow && style.shadows[useDropShadow ? 'drop' : 'box'][shadow === '8px' ? 8 : 4]} ${attrs.class}`
+		`${style.base} ${style.layout[appendIcon != null ? 'append' : 'none']} ${style.variants[variant].base} ${style.variants[variant][color]} ${shadow && style.shadows[useDropShadow ? 'drop' : 'box'][shadow === '8px' ? 8 : 4]} ${attrs.class}`
 	);
 </script>
 
+{#snippet content()}
+	{#if typeof children == 'function'}
+		{@render children()}
+	{:else if children != null}
+		{children}
+	{/if}
+	{#if appendIcon != null}
+		<i>{@render appendIcon()}</i>
+	{/if}
+{/snippet}
+
 {#if href != null}
 	<a {...attrs as HTMLAnchorAttributes} class={classes} {href}>
-		{#if typeof children == 'function'}
-			{@render children()}
-		{:else if children != null}
-			{children}
-		{/if}
+		{@render content()}
 	</a>
 {:else}
 	<button {...attrs as HTMLButtonAttributes} class={classes}>
-		{#if typeof children == 'function'}
-			{@render children()}
-		{:else if children != null}
-			{children}
-		{/if}
+		{@render content()}
 	</button>
 {/if}
