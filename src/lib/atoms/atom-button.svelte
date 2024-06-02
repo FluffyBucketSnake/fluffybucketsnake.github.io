@@ -28,7 +28,7 @@
 					'border-secondary-400 hover:border-secondary-200 active:border-secondary-500 bg-secondary-500 hover:bg-secondary-400 active:bg-secondary-600 text-secondary-fg'
 			},
 			text: {
-				base: 'p-1 border-transparent bg-transparent hover:bg-fg/10 focus:bg-fg/10',
+				base: 'p-1 border-transparent bg-transparent hover:bg-fg/5 focus:bg-fg/5 active:bg-fg/15',
 				primary: '',
 				secondary: ''
 			}
