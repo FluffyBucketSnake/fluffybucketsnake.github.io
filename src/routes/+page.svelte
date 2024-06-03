@@ -2,6 +2,7 @@
 	import me from '$lib/assets/me.json';
 	import background from '$lib/assets/img/bg-wavy.png';
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
+	import AnimatedText from '$lib/components/atoms/animated-text.svelte';
 	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
 	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
@@ -23,10 +24,28 @@
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">
 		<span class="font-stylized text-2xl leading-none drop-shadow-4px">Welcome to</span>
-		<span class="font-header text-5xl leading-none text-secondary-400 text-center drop-shadow-8px">
-			Fluffy<wbr />Bucket<wbr />Snake's
+		<span
+			class="relative font-header leading-snug text-5xl text-secondary-400 text-center drop-shadow-8px"
+		>
+			<AnimatedText
+				text="Fluffy"
+				class="relative animate-wave"
+				style={(i) => `animation-delay: -${i * 110}ms`}
+			/>
+			<wbr />
+			<AnimatedText
+				text="Bucket"
+				class="relative animate-wave"
+				style={(i) => `animation-delay: -${(i + 6) * 110}ms`}
+			/>
+			<wbr />
+			<AnimatedText
+				text="Snake's"
+				class="relative animate-wave"
+				style={(i) => `animation-delay: -${(i + 12) * 110}ms`}
+			/>
 		</span>
-		<span class="mt-1 font-stylized text-2xl leading-none text-primary-200 drop-shadow-4px">
+		<span class="mt-4 font-stylized text-2xl leading-none text-primary-200 drop-shadow-4px">
 			Hacking Shack
 		</span>
 	</h1>
@@ -46,7 +65,9 @@
 		</AtomButton>
 	</div>
 {/snippet}
-<section class="w-screen min-h-screen h-[546px] flex justify-center items-center">
+<section
+	class="w-screen min-h-screen h-[546px] flex justify-center lg:justify-start lg:pl-[112px] items-center"
+>
 	{#snippet about()}
 		<main
 			class="prose prose-gray text-fg prose-strong:text-primary-200 prose-em:text-secondary-400 max-w-none"
@@ -65,7 +86,7 @@
 	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'])}
 </section>
 <section
-	class="w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center items-center"
+	class="w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center lg:justify-end lg:pr-[112px] items-center"
 >
 	{#snippet blog()}
 		<ol class="lg:pb-2 flex flex-col lg:flex-row items-center gap-4 lg:overflow-x-scroll w-full">

@@ -71,6 +71,15 @@ export default {
 				'8px': '8px 8px #212123',
 				'16px': '16px 16px #212123',
 				'32px/A': '32px 32px #21212380'
+			},
+			animation: {
+				wave: 'wave 3s ease infinite'
+			},
+			keyframes: {
+				wave: {
+					'0%,100%': { top: '8px' },
+					'50%': { top: '-8px' }
+				}
 			}
 		}
 	},
