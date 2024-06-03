@@ -6,17 +6,20 @@
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
 	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
 	import type { Snippet } from 'svelte';
-	import type { PageData } from './$types';
 	import { format } from 'date-fns/fp';
+	import { wavesEffect } from '$lib/effects/waveEffects';
+	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
 
 	const formatPostDate = format('PPP');
 
-	export let data: PageData;
+	const { data } = $props();
 </script>
 
-<figure class="fixed top-0 left-0 w-screen h-screen -z-10">
-	<img alt="Site background" src={background} class="w-full h-full" />
-</figure>
+<EffectCanvas class="fixed top-0 left-0 w-screen h-screen -z-10" renderEffect={wavesEffect}>
+	{#snippet fallback()}
+		<img alt="Site background" src={background} class="w-full h-full" />
+	{/snippet}
+</EffectCanvas>
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">
 		<span class="font-stylized text-2xl leading-none drop-shadow-4px">Welcome to</span>
