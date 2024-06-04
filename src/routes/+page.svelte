@@ -10,6 +10,7 @@
 	import { format } from 'date-fns/fp';
 	import { wavesEffect } from '$lib/effects/waveEffects';
 	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
+	import { appearOnScroll } from '$lib/actions/appearOnScroll.ts';
 
 	const formatPostDate = format('PPP');
 
@@ -51,9 +52,12 @@
 	</h1>
 </header>
 
-{#snippet card(title: string, content: Snippet, cta: [string, string])}
+{#snippet card(title: string, content: Snippet, cta: [string, string], side: 'left' | 'right')}
 	<div
-		class="border border-carbon bg-acrylic/60 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl"
+		use:appearOnScroll={side === 'left'
+			? { animation: 'opacity-1 translate-x-0', animationOut: 'opacity-0 -translate-x-full' }
+			: { animation: 'opacity-1 translate-x-0', animationOut: 'opacity-0 translate-x-full' }}
+		class="border border-carbon bg-acrylic/60 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl ease-in-out transition duration-1000 translate-x-f"
 	>
 		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{title}</h2>
 		{@render content()}
@@ -66,7 +70,7 @@
 	</div>
 {/snippet}
 <section
-	class="w-screen min-h-screen h-[546px] flex justify-center lg:justify-start lg:pl-[112px] items-center"
+	class="mt-[50vh] w-screen min-h-screen h-[546px] flex justify-center lg:justify-start lg:pl-[112px] items-center"
 >
 	{#snippet about()}
 		<main
@@ -83,10 +87,10 @@
 			</p>
 		</main>
 	{/snippet}
-	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'])}
+	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'], 'left')}
 </section>
 <section
-	class="w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center lg:justify-end lg:pr-[112px] items-center"
+	class="mt-[50vh] w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center lg:justify-end lg:pr-[112px] items-center"
 >
 	{#snippet blog()}
 		<ol class="lg:pb-2 flex flex-col lg:flex-row items-center gap-4 lg:overflow-x-scroll w-full">
@@ -109,17 +113,20 @@
 			{/each}
 		</ol>
 	{/snippet}
-	{@render card('What have I been posting', blog, ['/blog', 'Click here to see more!'])}
+	{@render card('What have I been posting', blog, ['/blog', 'Click here to see more!'], 'right')}
 </section>
 
 <footer
-	class="w-screen min-h-screen h-[546px] p-16 flex flex-col justify-end items-center relative"
+	class="mt-[50vh] w-screen min-h-screen h-[546px] p-16 flex flex-col justify-end items-center relative"
 >
 	<AtomButton
 		href="/donate"
 		color="secondary"
 		shadow="8px"
 		class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+		use={[
+			[appearOnScroll, { animation: 'animate-appear-down', animationOut: 'animate-disappear-down' }]
+		]}
 	>
 		Wanna buy me a coffe? Click here!
 		{#snippet appendIcon()}
@@ -127,14 +134,41 @@
 		{/snippet}
 	</AtomButton>
 	<ul class="flex gap-4">
-		<li>
+		<li
+			class="transition ease-in-out duration-1000"
+			use:appearOnScroll={{
+				animation: 'delay-100 opacity-1 translate-y-0',
+				animationOut: 'opacity-0 translate-y-full'
+			}}
+		>
 			<AtomButton variant="text" shadow="8px" href={me.links.linkedin}><LogoLinkedIn /></AtomButton>
 		</li>
-		<li>
+		<li
+			class="transition ease-in-out duration-1000"
+			use:appearOnScroll={{
+				animation: 'delay-200 opacity-1 translate-y-0',
+				animationOut: 'opacity-0 translate-y-full'
+			}}
+		>
 			<AtomButton variant="text" shadow="8px" href={me.links.github}><LogoGithub /></AtomButton>
 		</li>
 	</ul>
-	<span class="mt-8 font-stylized drop-shadow-4px">Developed by me :)</span>
-	<span class="mt-1 font-stylized text-xs drop-shadow-4px">Powered by SvelteKit & Tailwind CSS</span
+	<span
+		class="mt-8 font-stylized drop-shadow-4px transition ease-in-out duration-1000"
+		use:appearOnScroll={{
+			animation: 'delay-300 opacity-1 translate-y-0',
+			animationOut: 'opacity-0 translate-y-full'
+		}}
 	>
+		Developed by me :)
+	</span>
+	<span
+		class="mt-1 font-stylized text-xs drop-shadow-4px transition ease-in-out duration-1000"
+		use:appearOnScroll={{
+			animation: 'delay-[400ms] opacity-1 translate-y-0',
+			animationOut: 'opacity-0 translate-y-full'
+		}}
+	>
+		Powered by SvelteKit & Tailwind CSS
+	</span>
 </footer>

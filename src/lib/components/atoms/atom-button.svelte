@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+	import type { ActionWithParams } from '$lib/types/components';
+	import type { Action } from 'svelte/action';
 
 	export interface ISharedProps {
 		color?: 'primary' | 'secondary';
@@ -11,10 +13,12 @@
 
 	export interface ILinkVariantProps extends HTMLAnchorAttributes {
 		href: string;
+		use?: (Action<HTMLAnchorElement> | ActionWithParams<HTMLAnchorElement>)[];
 	}
 
 	export interface IActionVariantProps extends HTMLButtonAttributes {
 		href: undefined;
+		use?: (Action<HTMLButtonElement> | ActionWithParams<HTMLButtonElement>)[];
 	}
 
 	export type Props = ISharedProps & (ILinkVariantProps | IActionVariantProps);
@@ -53,6 +57,8 @@
 </script>
 
 <script lang="ts">
+	import { useActions } from '$lib/actions/useActions';
+
 	const {
 		href,
 		children,
@@ -60,6 +66,7 @@
 		shadow = false,
 		variant = 'filled',
 		appendIcon,
+		use,
 		...attrs
 	}: Props = $props();
 
@@ -81,11 +88,11 @@
 {/snippet}
 
 {#if href != null}
-	<a {...attrs as HTMLAnchorAttributes} class={classes} {href}>
+	<a {...attrs as HTMLAnchorAttributes} class={classes} {href} use:useActions={use}>
 		{@render content()}
 	</a>
 {:else}
-	<button {...attrs as HTMLButtonAttributes} class={classes}>
+	<button {...attrs as HTMLButtonAttributes} class={classes} use:useActions={use}>
 		{@render content()}
 	</button>
 {/if}
