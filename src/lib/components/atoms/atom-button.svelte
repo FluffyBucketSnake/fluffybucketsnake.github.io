@@ -1,11 +1,11 @@
 <script lang="ts" context="module">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
-	import type { ActionWithParams } from '$lib/types/components';
+	import type { ActionWithParam } from '$lib/types/components';
 	import type { Action } from 'svelte/action';
 
 	export interface ISharedProps {
-		color?: 'primary' | 'secondary';
+		color?: 'default' | 'primary' | 'secondary' | 'danger';
 		shadow?: boolean | '8px';
 		variant?: 'filled' | 'text';
 		appendIcon?: Snippet;
@@ -13,12 +13,12 @@
 
 	export interface ILinkVariantProps extends HTMLAnchorAttributes {
 		href: string;
-		use?: (Action<HTMLAnchorElement> | ActionWithParams<HTMLAnchorElement>)[];
+		use?: (Action<HTMLAnchorElement> | ActionWithParam<HTMLAnchorElement>)[];
 	}
 
 	export interface IActionVariantProps extends HTMLButtonAttributes {
-		href: undefined;
-		use?: (Action<HTMLButtonElement> | ActionWithParams<HTMLButtonElement>)[];
+		href?: undefined;
+		use?: (Action<HTMLButtonElement> | ActionWithParam<HTMLButtonElement>)[];
 	}
 
 	export type Props = ISharedProps & (ILinkVariantProps | IActionVariantProps);
@@ -31,16 +31,23 @@
 		},
 		variants: {
 			filled: {
-				base: 'border p-2',
+				base: 'p-2',
+				default:
+					'border border-matte hover:border-separator focus:border-separator-hl active:border-carbon bg-carbon hover:bg-matte focus:bg-matte active:bg-carbon text-fg',
 				primary:
-					'border-primary-400 hover:border-primary-200 focus:border-primary-200 active:border-primary-500 bg-primary-500 hover:bg-primary-400 focus:bg-primary-400 active:bg-primary-600 text-primary-fg',
+					'border border-primary-400 hover:border-primary-200 focus:border-primary-200 active:border-primary-500 bg-primary-500 hover:bg-primary-400 focus:bg-primary-400 active:bg-primary-600 text-primary-fg',
 				secondary:
-					'border-secondary-400 hover:border-secondary-200 active:border-secondary-500 bg-secondary-500 hover:bg-secondary-400 active:bg-secondary-600 text-secondary-fg'
+					'border border-secondary-400 hover:border-secondary-200 focus:border-secondary-200 active:border-secondary-500 bg-secondary-500 hover:bg-secondary-400 focus:bg-secondary-400 active:bg-secondary-600 text-secondary-fg',
+				danger:
+					'bg-danger-500 hover:bg-danger-250 focus:bg-primary-250 active:bg-primary-750 text-danger-fg'
 			},
 			text: {
-				base: 'p-1 border-transparent bg-transparent hover:bg-fg/5 focus:bg-fg/5 active:bg-fg/15',
+				base: 'p-1 border-transparent bg-transparent',
+				default: 'text-fg hover:bg-fg/5 focus:bg-fg/5 active:bg-fg/15',
 				primary: '',
-				secondary: ''
+				secondary: '',
+				danger:
+					'text-danger-250 hover:bg-danger-250/15 focus:bg-danger-250/15 active:bg-danger-250/30'
 			}
 		},
 		shadows: {
@@ -62,7 +69,7 @@
 	const {
 		href,
 		children,
-		color = 'primary',
+		color = 'default',
 		shadow = false,
 		variant = 'filled',
 		appendIcon,
