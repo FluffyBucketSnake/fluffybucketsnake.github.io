@@ -34,21 +34,21 @@
 
 <Modal
 	bind:this={modalRef}
-	class="m-4 w-full h-full border border-carbon bg-acrylic/60 open:flex flex-col items-stretch drop-shadow-64px {classes}"
+	class="lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 m-4 lg:m-0 w-full h-full lg:max-w-[992px] lg:max-h-[736px] lg:w-min lg:h-min border border-carbon p-2 bg-acrylic/60 open:flex flex-col items-stretch drop-shadow-64px {classes}"
 	autofocus
 >
 	{#snippet header()}
-		<header class="p-4 flex items-center gap-2 {style[color].title}">
+		<header class="p-2 pb-4 flex items-center gap-2 {style[color].title}">
 			{#if icon != null}
 				{@render icon()}
 			{/if}
-			<h2 class="font-header text-xl">{title}</h2>
+			<h2 class="font-header text-xl leading-none">{title}</h2>
 			<AtomButton variant="text" class="ml-auto" color="danger" onclick={() => (close!)()}>
 				<IconClose />
 			</AtomButton>
 		</header>
 	{/snippet}
-	<main class="flex-1 border-1 border-matte bg-carbon {mainClass}">
+	<main class="flex-1 border-1 border-highlight bg-carbon p-4 {mainClass}">
 		{#if children}
 			{@render children()}
 		{/if}
