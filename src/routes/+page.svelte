@@ -5,23 +5,62 @@
 	import AnimatedText from '$lib/components/atoms/animated-text.svelte';
 	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
+	import IconError from 'virtual:icons/pixelent/error-circle-24-regular';
 	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
 	import type { Snippet } from 'svelte';
 	import { format } from 'date-fns/fp';
 	import { wavesEffect } from '$lib/effects/waveEffects';
 	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
-	import { appearOnScroll } from '$lib/actions/appearOnScroll.ts';
+	import { appearOnScroll } from '$lib/actions/appearOnScroll';
+	import Dialog from '$lib/components/molecules/dialog.svelte';
+	import { CanvasBlockedError } from '$lib/errors/canvas-blocked';
+	import { WebGL2ShaderCompilationError } from '$lib/errors/webgl2';
 
 	const formatPostDate = format('PPP');
 
 	const { data } = $props();
+
+	let effectError: unknown = $state();
+	let dialogRef: Dialog | undefined = $state();
 </script>
 
-<EffectCanvas class="fixed top-0 left-0 w-screen h-screen -z-10" renderEffect={wavesEffect}>
+{#if effectError != null}
+	<Dialog bind:this={dialogRef} title="Error" color="danger" mainClass="flex flex-col text-fg">
+		{#snippet icon()}
+			<IconError />
+		{/snippet}
+		{#if effectError instanceof CanvasBlockedError}
+			<p class="font-stylized text-lg">{effectError.message}</p>
+		{:else if effectError instanceof WebGL2ShaderCompilationError}
+			<h3 class="font-stylized text-2xl">A shader compilation error occurred.</h3>
+			<span class="mt-2">Details:</span>
+			<pre
+				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
+					>{effectError.errors
+						.map(({ row, column, message }) => `${row}:${column}: ${message}`)
+						.join('\n')}</samp
+				></pre>
+		{/if}
+	</Dialog>
+	<AtomButton
+		class="fixed top-2 right-2 z-10"
+		color="danger"
+		shadow="8px"
+		onclick={() => dialogRef?.show()}
+	>
+		<IconError />
+	</AtomButton>
+{/if}
+<EffectCanvas
+	class="fixed top-0 left-0 w-screen h-screen -z-10"
+	bind:error={effectError}
+	renderEffect={wavesEffect}
+>
 	{#snippet fallback()}
 		<img alt="Site background" src={background} class="w-full h-full" />
 	{/snippet}
 </EffectCanvas>
+
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">
 		<span class="font-stylized text-2xl leading-none drop-shadow-4px">Welcome to</span>
@@ -61,7 +100,7 @@
 	>
 		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{title}</h2>
 		{@render content()}
-		<AtomButton class="self-stretch lg:self-end" href={cta[0]} shadow>
+		<AtomButton class="self-stretch lg:self-end" color="primary" href={cta[0]} shadow>
 			{cta[1]}
 			{#snippet appendIcon()}
 				<IconChevronRight />
