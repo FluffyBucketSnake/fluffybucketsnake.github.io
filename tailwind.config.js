@@ -14,12 +14,12 @@ export default {
 				darkest: '#212123',
 				lightest: '#f2f0e5',
 				fg: '#f2f0e5',
-				fgInv: '#212123',
+				'fg-inv': '#212123',
 				carbon: '#45444f',
 				acrylic: '#212123',
 				matte: '#646365',
 				separator: '#646365',
-				separatorHl: '#868188',
+				'separator-hl': '#868188',
 				primary: {
 					800: '#352b42',
 					600: '#3a3858',
@@ -63,7 +63,8 @@ export default {
 				'4px': '4px 4px #212123',
 				'8px': '8px 8px #212123',
 				'16px': '16px 16px #212123',
-				'32px': '32px 32px #212123C0'
+				'32px': '32px 32px #212123C0',
+				'64px': '64px 64px #212123'
 			},
 			boxShadow: {
 				'2px': '2px 2px #212123',
