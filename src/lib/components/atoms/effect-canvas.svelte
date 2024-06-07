@@ -1,22 +1,22 @@
-<svelte:options runes={true} />
+<script lang="ts" context="module">
+	export interface Props {
+		class: string;
+		error?: unknown;
+		renderEffect: RenderEffectFactory;
+		fallback?: Snippet;
+	}
+</script>
 
 <script lang="ts">
 	import type { RenderEffectFactory } from '$lib/effects/base';
 	import type { Snippet } from 'svelte';
 
-	interface Props {
-		class: string;
-		renderEffect: RenderEffectFactory;
-		fallback?: Snippet;
-	}
-
-	let { renderEffect, fallback, ...attrs }: Props = $props();
+	let { error = $bindable(), renderEffect, fallback, ...attrs }: Props = $props();
 
 	let state: 'idle' | 'playing' | 'error' = $state('idle');
-	let error: unknown = $state(null);
 	let canvas: HTMLCanvasElement | undefined = $state();
 
-	const play = () => {
+	export const play = () => {
 		state = 'playing';
 	};
 
