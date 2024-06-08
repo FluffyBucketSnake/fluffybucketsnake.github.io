@@ -71,12 +71,17 @@ export default {
 				'4px': '4px 4px #212123',
 				'8px': '8px 8px #212123',
 				'16px': '16px 16px #212123',
+				'32px': '32px 32px #212123',
 				'32px/A': '32px 32px #21212380'
 			},
 			animation: {
 				wave: 'wave 3s ease infinite',
 				'appear-down': 'appear-down 1s ease forwards var(--animation-delay, 0ms)',
-				'disappear-down': 'disappear-down 1s ease forwards var(--animation-delay, 0ms)'
+				'disappear-down': 'disappear-down 1s ease forwards var(--animation-delay, 0ms)',
+				'appear-left': 'appear-left 1s ease forwards var(--animation-delay, 0ms)',
+				'disappear-left': 'disappear-left 1s ease forwards var(--animation-delay, 0ms)',
+				'fade-in': 'fade-in 1s ease forwards var(--animation-delay, 0ms)',
+				'fade-out': 'fade-out 1s ease forwards var(--animation-delay, 0ms)'
 			},
 			keyframes: {
 				wave: {
@@ -105,6 +110,46 @@ export default {
 						opacity: 1,
 						transform:
 							'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) translateY(0)'
+					}
+				},
+				'appear-left': {
+					'0%': {
+						opacity: 0,
+						transform:
+							'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) translateX(-100%)'
+					},
+					'100%': {
+						opacity: 1,
+						transform:
+							'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) translateX(0)'
+					}
+				},
+				'disappear-left': {
+					'100%': {
+						opacity: 0,
+						transform:
+							'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) translateX(-100%)'
+					},
+					'0%': {
+						opacity: 1,
+						transform:
+							'translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) translateX(0)'
+					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: 0
+					},
+					'100%': {
+						opacity: 1
+					}
+				},
+				'fade-out': {
+					'100%': {
+						opacity: 0
+					},
+					'0%': {
+						opacity: 1
 					}
 				}
 			}
