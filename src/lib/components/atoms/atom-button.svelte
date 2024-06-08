@@ -8,6 +8,7 @@
 		color?: 'default' | 'primary' | 'secondary' | 'danger';
 		shadow?: boolean | '8px';
 		variant?: 'filled' | 'text';
+		prependIcon?: Snippet;
 		appendIcon?: Snippet;
 	}
 
@@ -26,8 +27,10 @@
 	const style = {
 		base: 'font-stylized align-middle text-center transition duration-75 ease-in-out focus:outline-0 grid gap-2 items-center justify-center',
 		layout: {
-			none: 'grid-cols-[1fr]',
-			append: 'grid-cols-[1fr_auto]'
+			0: 'grid-cols-[1fr]',
+			1: 'grid-cols-[auto_1fr]',
+			2: 'grid-cols-[1fr_auto]',
+			3: 'grid-cols-[1fr_auto_1fr]'
 		},
 		variants: {
 			filled: {
@@ -72,6 +75,7 @@
 		color = 'default',
 		shadow = false,
 		variant = 'filled',
+		prependIcon,
 		appendIcon,
 		use,
 		...attrs
@@ -79,11 +83,14 @@
 
 	const useDropShadow = $derived(variant == 'text');
 	const classes = $derived(
-		`${style.base} ${style.layout[appendIcon != null ? 'append' : 'none']} ${style.variants[variant].base} ${style.variants[variant][color]} ${shadow && style.shadows[useDropShadow ? 'drop' : 'box'][shadow === '8px' ? 8 : 4]} ${attrs.class}`
+		`${style.base} ${style.layout[((prependIcon ? 1 : 0) | (appendIcon ? 2 : 0)) as 0 | 1 | 2 | 3]} ${style.variants[variant].base} ${style.variants[variant][color]} ${shadow && style.shadows[useDropShadow ? 'drop' : 'box'][shadow === '8px' ? 8 : 4]} ${attrs.class}`
 	);
 </script>
 
 {#snippet content()}
+	{#if prependIcon != null}
+		<i>{@render prependIcon()}</i>
+	{/if}
 	{#if typeof children == 'function'}
 		{@render children()}
 	{:else if children != null}
