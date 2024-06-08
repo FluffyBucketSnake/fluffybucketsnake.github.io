@@ -14,7 +14,7 @@
 
 	export interface ILinkVariantProps extends HTMLAnchorAttributes {
 		href: string;
-		use?: (Action<HTMLAnchorElement> | ActionWithParam<HTMLAnchorElement>)[];
+		use?: (Action<HTMLAnchorElement> | ActionWithParam<HTMLAnchorElement, any>)[];
 	}
 
 	export interface IActionVariantProps extends HTMLButtonAttributes {
