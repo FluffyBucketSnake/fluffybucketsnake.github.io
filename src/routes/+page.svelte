@@ -7,6 +7,7 @@
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
 	import IconError from 'virtual:icons/pixelent/error-circle-24-regular';
 	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
+	import IconMenu from 'virtual:icons/pixelent/menu-24-regular';
 	import type { Snippet } from 'svelte';
 	import { format } from 'date-fns/fp';
 	import { wavesEffect } from '$lib/effects/waveEffects';
@@ -15,51 +16,25 @@
 	import Dialog from '$lib/components/molecules/dialog.svelte';
 	import { CanvasBlockedError } from '$lib/errors/canvas-blocked';
 	import { WebGL2ShaderCompilationError } from '$lib/errors/webgl2';
+	import LayoutSidebar from '$lib/components/layout/layout-sidebar.svelte';
+	import UtilProgressiveEnhancement from '$lib/components/utils/util-progressive-enhancement.svelte';
 
 	const formatPostDate = format('PPP');
 
 	const { data } = $props();
 
 	let effectError: unknown = $state();
-	let dialogRef: Dialog | undefined = $state();
 </script>
 
-{#if effectError != null}
-	<Dialog bind:this={dialogRef} title="Error" color="danger" mainClass="flex flex-col text-fg">
-		{#snippet icon()}
-			<IconError />
+<UtilProgressiveEnhancement>
+	<LayoutSidebar>
+		{#snippet activator({ onclick })}
+			<AtomButton variant="text" shadow="8px" class="fixed left-2 top-2 p-2" {onclick}>
+				<IconMenu />
+			</AtomButton>
 		{/snippet}
-		{#if effectError instanceof CanvasBlockedError}
-			<p class="font-stylized text-lg">{effectError.message}</p>
-		{:else if effectError instanceof WebGL2ShaderCompilationError}
-			<h3 class="font-stylized text-2xl">A shader compilation error occurred.</h3>
-			<span class="mt-2">Details:</span>
-			<pre
-				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
-					>{effectError.errors
-						.map(({ row, column, message }) => `${row}:${column}: ${message}`)
-						.join('\n')}</samp
-				></pre>
-		{/if}
-	</Dialog>
-	<AtomButton
-		class="fixed top-2 right-2 z-10"
-		color="danger"
-		shadow="8px"
-		onclick={() => dialogRef?.show()}
-	>
-		<IconError />
-	</AtomButton>
-{/if}
-<EffectCanvas
-	class="fixed top-0 left-0 w-screen h-screen -z-10"
-	bind:error={effectError}
-	renderEffect={wavesEffect}
->
-	{#snippet fallback()}
-		<img alt="Site background" src={background} class="w-full h-full" />
-	{/snippet}
-</EffectCanvas>
+	</LayoutSidebar>
+</UtilProgressiveEnhancement>
 
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">
@@ -211,3 +186,37 @@
 		Powered by SvelteKit & Tailwind CSS
 	</span>
 </footer>
+
+{#if effectError != null}
+	<Dialog title="Error" color="danger" mainClass="flex flex-col text-fg">
+		{#snippet activator({ onclick })}
+			<AtomButton class="fixed top-2 right-2 z-10" color="danger" shadow="8px" {onclick}>
+				<IconError />
+			</AtomButton>
+		{/snippet}
+		{#snippet icon()}
+			<IconError />
+		{/snippet}
+		{#if effectError instanceof CanvasBlockedError}
+			<p class="font-stylized text-lg">{effectError.message}</p>
+		{:else if effectError instanceof WebGL2ShaderCompilationError}
+			<h3 class="font-stylized text-2xl">A shader compilation error occurred.</h3>
+			<span class="mt-2">Details:</span>
+			<pre
+				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
+					>{effectError.errors
+						.map(({ row, column, message }) => `${row}:${column}: ${message}`)
+						.join('\n')}</samp
+				></pre>
+		{/if}
+	</Dialog>
+{/if}
+<EffectCanvas
+	class="fixed top-0 left-0 w-screen h-screen -z-10"
+	bind:error={effectError}
+	renderEffect={wavesEffect}
+>
+	{#snippet fallback()}
+		<img alt="Site background" src={background} class="w-full h-full" />
+	{/snippet}
+</EffectCanvas>
