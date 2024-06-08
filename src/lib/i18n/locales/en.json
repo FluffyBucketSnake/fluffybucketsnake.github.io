@@ -1,0 +1,21 @@
+{
+  "sidebar": {
+    "labels": {
+      "open": "Open sidebar",
+      "close": "Close sidebar"
+    },
+    "pages": {
+      "home": "Homepage",
+      "me": ""
+    }
+  },
+  "homepage": {
+    "title": [
+      "Welcome to",
+      "Fluffy",
+      "Bucket",
+      "Snake's",
+      "Hacking Shack"
+    ]
+  }
+}
