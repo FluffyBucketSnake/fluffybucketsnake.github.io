@@ -3,10 +3,12 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	interface Props {
+		open?: boolean;
 		color?: 'default' | 'danger';
 		class?: HTMLAttributes<HTMLElement>['class'];
 		mainClass?: HTMLAttributes<HTMLElement>['class'];
 		title?: string;
+		activator?: Snippet<[ActivatorProps]>;
 		icon?: Snippet;
 		children?: Snippet;
 	}
@@ -21,21 +23,32 @@
 
 <script lang="ts">
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
-	import Modal from '$lib/components/atoms/modal.svelte';
+	import Modal, { type ActivatorProps } from '$lib/components/atoms/modal.svelte';
 	import IconClose from 'virtual:icons/pixelent/close-24-regular';
 
-	let { color = 'danger', class: classes, mainClass, title, icon, children }: Props = $props();
+	let {
+		open = $bindable(),
+		color = 'danger',
+		class: classes,
+		mainClass,
+		title,
+		activator,
+		icon,
+		children
+	}: Props = $props();
 
 	let modalRef: Modal | undefined = $state();
 
-	export const show = () => modalRef?.show();
-	export const close = () => modalRef?.close();
+	export const show = $derived(modalRef!.show);
+	export const close = $derived(modalRef?.close);
 </script>
 
 <Modal
 	bind:this={modalRef}
+	bind:open
 	class="lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 m-4 lg:m-0 w-full h-full lg:max-w-[992px] lg:max-h-[736px] lg:w-min lg:h-min border border-carbon p-2 bg-acrylic/60 open:flex flex-col items-stretch drop-shadow-64px {classes}"
 	autofocus
+	{activator}
 >
 	{#snippet header()}
 		<header class="p-2 pb-4 flex items-center gap-2 {style[color].title}">
