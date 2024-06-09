@@ -13,15 +13,15 @@
 
 	let { error = $bindable(), renderEffect, fallback, ...attrs }: Props = $props();
 
-	let state: 'idle' | 'playing' | 'error' = $state('idle');
+	let effectState: 'idle' | 'playing' | 'error' = $state('idle');
 	let canvas: HTMLCanvasElement | undefined = $state();
 
 	export const play = () => {
-		state = 'playing';
+		effectState = 'playing';
 	};
 
 	$effect(() => {
-		if (canvas == null || state != 'playing') {
+		if (canvas == null || effectState != 'playing') {
 			return;
 		}
 		try {
@@ -41,14 +41,14 @@
 		if (error == null) {
 			return;
 		}
-		state = 'error';
+		effectState = 'error';
 	});
 
 	$effect(() => play());
 </script>
 
 <figure {...attrs}>
-	{#if state === 'playing'}
+	{#if effectState === 'playing'}
 		<canvas bind:this={canvas} class="w-full h-full"></canvas>
 	{:else if fallback != null}
 		{@render fallback()}
