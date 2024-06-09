@@ -2,6 +2,7 @@ import VERT_SRC from '$lib/shaders/basic.vert?raw';
 import { CanvasBlockedError } from '$lib/errors/canvas-blocked';
 import { WebGL2ShaderCompilationError } from '$lib/errors/webgl2';
 import { createQuadStrip2D } from '$lib/utils/geometry';
+import type { SimpleVertex2D } from '$lib/types/geometry';
 
 const POSITION_ATTRIBUTE_NAME = 'in_position';
 

@@ -23,7 +23,7 @@
 
 <script lang="ts">
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
-	import Modal, { type ActivatorProps } from '$lib/components/atoms/modal.svelte';
+	import Modal, { type ActivatorProps } from '$lib/components/base/modal.svelte';
 	import IconClose from 'virtual:icons/pixelent/close-24-regular';
 
 	let {

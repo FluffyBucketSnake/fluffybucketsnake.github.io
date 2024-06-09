@@ -3,12 +3,12 @@
 	import { format } from 'date-fns/fp';
 	import { t } from '$lib/i18n';
 	import { appearOnScroll } from '$lib/actions/appearOnScroll';
-	import UtilProgressiveEnhancement from '$lib/components/utils/util-progressive-enhancement.svelte';
-	import AtomButton from '$lib/components/atoms/atom-button.svelte';
-	import AnimatedText from '$lib/components/atoms/animated-text.svelte';
-	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
 	import LayoutSidebar from '$lib/components/layout/layout-sidebar.svelte';
 	import DialogRenderError from '$lib/components/dialogs/dialog-render-error.svelte';
+	import AtomButton from '$lib/components/atoms/atom-button.svelte';
+	import AnimatedText from '$lib/components/utils/animated-text.svelte';
+	import ProgressiveEnhancement from '$lib/components/utils/progressive-enhancement.svelte';
+	import EffectCanvas from '$lib/components/base/effect-canvas.svelte';
 	import { wavesEffect } from '$lib/effects/waveEffects';
 	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
@@ -25,7 +25,7 @@
 	let effectError: unknown = $state();
 </script>
 
-<UtilProgressiveEnhancement>
+<ProgressiveEnhancement>
 	<LayoutSidebar>
 		{#snippet activator({ onclick })}
 			<AtomButton
@@ -39,7 +39,7 @@
 			</AtomButton>
 		{/snippet}
 	</LayoutSidebar>
-</UtilProgressiveEnhancement>
+</ProgressiveEnhancement>
 
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">

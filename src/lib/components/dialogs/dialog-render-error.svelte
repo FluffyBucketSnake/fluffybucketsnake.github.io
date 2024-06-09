@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import type { Snippet } from 'svelte';
-	import type { ActivatorProps } from '$lib/components/atoms/modal.svelte';
+	import type { ActivatorProps } from '$lib/components/base/modal.svelte';
 
 	export interface Props {
 		error: unknown;
