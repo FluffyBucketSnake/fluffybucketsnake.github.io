@@ -1,24 +1,22 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+	import { format } from 'date-fns/fp';
 	import { t } from '$lib/i18n';
-	import me from '$lib/assets/me.json';
-	import background from '$lib/assets/img/bg-wavy.png';
+	import { appearOnScroll } from '$lib/actions/appearOnScroll';
+	import UtilProgressiveEnhancement from '$lib/components/utils/util-progressive-enhancement.svelte';
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
 	import AnimatedText from '$lib/components/atoms/animated-text.svelte';
+	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
+	import LayoutSidebar from '$lib/components/layout/layout-sidebar.svelte';
+	import DialogRenderError from '$lib/components/dialogs/dialog-render-error.svelte';
+	import { wavesEffect } from '$lib/effects/waveEffects';
 	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
 	import LogoLinkedIn from 'virtual:icons/pixelent/logo-linkedin-32-filled';
 	import IconError from 'virtual:icons/pixelent/error-circle-24-regular';
 	import IconChevronRight from 'virtual:icons/pixelent/chevron-right-32-filled';
 	import IconMenu from 'virtual:icons/pixelent/menu-24-regular';
-	import type { Snippet } from 'svelte';
-	import { format } from 'date-fns/fp';
-	import { wavesEffect } from '$lib/effects/waveEffects';
-	import EffectCanvas from '$lib/components/atoms/effect-canvas.svelte';
-	import { appearOnScroll } from '$lib/actions/appearOnScroll';
-	import Dialog from '$lib/components/molecules/dialog.svelte';
-	import { CanvasBlockedError } from '$lib/errors/canvas-blocked';
-	import { WebGL2ShaderCompilationError } from '$lib/errors/webgl2';
-	import LayoutSidebar from '$lib/components/layout/layout-sidebar.svelte';
-	import UtilProgressiveEnhancement from '$lib/components/utils/util-progressive-enhancement.svelte';
+	import background from '$lib/assets/img/bg-wavy.png';
+	import me from '$lib/assets/me.json';
 
 	const formatPostDate = format('PPP');
 
@@ -205,35 +203,13 @@
 </footer>
 
 {#if effectError != null}
-	<Dialog title="Error" color="danger" mainClass="flex flex-col text-fg">
+	<DialogRenderError error={effectError}>
 		{#snippet activator({ onclick })}
 			<AtomButton class="fixed top-2 right-2 z-10" color="danger" shadow="8px" {onclick}>
 				<IconError />
 			</AtomButton>
 		{/snippet}
-		{#snippet icon()}
-			<IconError />
-		{/snippet}
-		{#if effectError instanceof CanvasBlockedError}
-			<p class="font-stylized text-lg">{$t('error_messages.blocked_canvas')}</p>
-		{:else if effectError instanceof WebGL2ShaderCompilationError}
-			<h3 class="font-stylized text-2xl">{$t('error_messages.shader_compilation')}</h3>
-			<span class="mt-2">{$t('error_messages.details')}</span>
-			<pre
-				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
-					>{effectError.errors
-						.map(({ row, column, message }) => `${row}:${column}: ${message}`)
-						.join('\n')}</samp
-				></pre>
-		{:else}
-			<h3 class="font-stylized text-2xl">{$t('error_messages.unknown')}</h3>
-			<span class="mt-2">{$t('error_messages.details')}</span>
-			<pre
-				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
-					>{effectError instanceof Error ? effectError.message : `${effectError}`}</samp
-				></pre>
-		{/if}
-	</Dialog>
+	</DialogRenderError>
 {/if}
 <EffectCanvas
 	class="fixed top-0 left-0 w-screen h-screen -z-10"
