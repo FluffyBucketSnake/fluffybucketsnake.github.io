@@ -5,17 +5,48 @@
       "close": "Close sidebar"
     },
     "pages": {
-      "home": "Homepage",
+      "home": "Home",
       "me": ""
     }
   },
-  "homepage": {
+  "dialog": {
+    "title": {
+      "error": "Error"
+    }
+  },
+  "error_messages": {
+    "blocked_canvas": "It seems canvas/WebGL features are being blocked by your browser. Perharps lower your anti-fingerprinting settings. Or not.",
+    "shader_compilation": "A shader compilation error occurred.",
+    "details": "Details:"
+  },
+  "home": {
     "title": [
       "Welcome to",
       "Fluffy",
       "Bucket",
       "Snake's",
       "Hacking Shack"
-    ]
+    ],
+    "about": {
+      "header": "Who am I",
+      "text": "I am <strong>Bruno Henrique Glowaski Morais</strong>, AKA <strong>FluffyBucketSnake</strong>, a passionate <em>software developer</em>. I specialize in <em>computer graphics</em>, <em>operating systems</em>, <em>security</em> & <em>software engineering</em>, but, get this, I can quickly learn new technologies. My favorite languages are Rust, C# & TypeScript, but I also know a lot about C++, C, Python & Lua, and a bit of Java. I love game development, low-level programming & UI/UX design.",
+      "cta": "Want to learn more? Click here!"
+    },
+    "blog": {
+      "header": "What have I been posting",
+      "cta": "Click here to see more!"
+    },
+    "footer": {
+      "donate": "Wanna buy me a coffe? Click here!",
+      "socials": {
+        "linkedin": "See my LinkedIn page",
+        "github": "See my Github repositories"
+      },
+      "author": "Developed by me :)",
+      "frameworks": "Powered by SvelteKit & Tailwind CSS"
+    },
+    "background": {
+      "show_errors": "An error ocurred while rendering. Click here to see more details"
+    }
   }
 }

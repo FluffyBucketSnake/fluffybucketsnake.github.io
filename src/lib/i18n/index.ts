@@ -1,9 +1,9 @@
 import I18n, { type Parser } from 'sveltekit-i18n';
 import type { Readable } from 'svelte/store';
-import type { PropertyStringPath } from '$lib/types/utils';
+import type { LeafStringPath } from '$lib/types/utils';
 import en from './locales/en.json';
 
-export type I18nKeys = PropertyStringPath<typeof en> | (string & {});
+export type I18nKeys = LeafStringPath<typeof en> | (string & {});
 
 const i18n = new I18n({
 	initLocale: 'en',

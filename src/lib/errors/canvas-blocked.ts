@@ -1,8 +1,6 @@
 export class CanvasBlockedError extends Error {
 	constructor() {
-		super(
-			'It seems canvas/WebGL features are being blocked by your browser. Perharps lower your anti-fingerprinting settings. Or not.'
-		);
+		super('Canvas and/or WebGL features are blocked by the browser');
 		this.name = 'CanvasBlockedError';
 	}
 }

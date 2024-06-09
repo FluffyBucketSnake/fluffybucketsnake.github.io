@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '$lib/i18n';
 	import me from '$lib/assets/me.json';
 	import background from '$lib/assets/img/bg-wavy.png';
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
@@ -29,7 +30,13 @@
 <UtilProgressiveEnhancement>
 	<LayoutSidebar>
 		{#snippet activator({ onclick })}
-			<AtomButton variant="text" shadow="8px" class="fixed left-2 top-2 p-2" {onclick}>
+			<AtomButton
+				aria-label={$t('sidebar.labels.open')}
+				variant="text"
+				shadow="8px"
+				class="fixed left-2 top-2 p-2"
+				{onclick}
+			>
 				<IconMenu />
 			</AtomButton>
 		{/snippet}
@@ -38,45 +45,47 @@
 
 <header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 	<h1 class="flex flex-col items-center">
-		<span class="font-stylized text-2xl leading-none drop-shadow-4px">Welcome to</span>
+		<span class="font-stylized text-2xl leading-none drop-shadow-4px">
+			{$t('home.title.0')}
+		</span>
 		<span
 			class="relative font-header leading-snug text-5xl text-secondary-400 text-center drop-shadow-8px"
 		>
 			<AnimatedText
-				text="Fluffy"
+				text={$t('home.title.1')}
 				class="relative animate-wave"
 				style={(i) => `animation-delay: -${i * 110}ms`}
 			/>
 			<wbr />
 			<AnimatedText
-				text="Bucket"
+				text={$t('home.title.2')}
 				class="relative animate-wave"
 				style={(i) => `animation-delay: -${(i + 6) * 110}ms`}
 			/>
 			<wbr />
 			<AnimatedText
-				text="Snake's"
+				text={$t('home.title.3')}
 				class="relative animate-wave"
 				style={(i) => `animation-delay: -${(i + 12) * 110}ms`}
 			/>
 		</span>
 		<span class="mt-4 font-stylized text-2xl leading-none text-primary-200 drop-shadow-4px">
-			Hacking Shack
+			{$t('home.title.4')}
 		</span>
 	</h1>
 </header>
 
-{#snippet card(title: string, content: Snippet, cta: [string, string], side: 'left' | 'right')}
+{#snippet card(id: string, content: Snippet, href: string, side: 'left' | 'right')}
 	<div
 		use:appearOnScroll={side === 'left'
 			? { animation: 'opacity-1 translate-x-0', animationOut: 'opacity-0 -translate-x-full' }
 			: { animation: 'opacity-1 translate-x-0', animationOut: 'opacity-0 translate-x-full' }}
 		class="border border-carbon bg-acrylic/60 p-8 w-[304px] lg:w-[800px] flex flex-col gap-8 shadow-32px/A backdrop-blur-2xl ease-in-out transition duration-1000 translate-x-f"
 	>
-		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{title}</h2>
+		<h2 class="font-header text-3xl text-primary-200 drop-shadow-4px">{$t(`home.${id}.header`)}</h2>
 		{@render content()}
-		<AtomButton class="self-stretch lg:self-end" color="primary" href={cta[0]} shadow>
-			{cta[1]}
+		<AtomButton class="self-stretch lg:self-end" color="primary" {href} shadow>
+			{$t(`home.${id}.cta`)}
 			{#snippet appendIcon()}
 				<IconChevronRight />
 			{/snippet}
@@ -91,17 +100,11 @@
 			class="prose prose-gray text-fg prose-strong:text-primary-200 prose-em:text-secondary-400 max-w-none"
 		>
 			<p>
-				I am <strong>Bruno Henrique Glowaski Morais</strong>, AKA
-				<strong>FluffyBucketSnake</strong>, a passionate <em>software developer</em>. I specialize
-				in <em>computer graphics</em>,
-				<em>operating systems</em>, <em>security</em> & <em>software engineering</em>, but, get
-				this, I can quickly learn new technologies. My favorite languages are Rust, C# & TypeScript,
-				but I also know a lot about C++, C, Python & Lua, and a bit of Java. I love game
-				development, low-level programming & UI/UX design.
+				{@html $t('home.about.text')}
 			</p>
 		</main>
 	{/snippet}
-	{@render card('Who am I', about, ['/about', 'Want to learn more? Click here!'], 'left')}
+	{@render card('about', about, '/about', 'left')}
 </section>
 <section
 	class="mt-[50vh] w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center lg:justify-end lg:pr-[112px] items-center"
@@ -127,7 +130,7 @@
 			{/each}
 		</ol>
 	{/snippet}
-	{@render card('What have I been posting', blog, ['/blog', 'Click here to see more!'], 'right')}
+	{@render card('blog', blog, '/blog', 'right')}
 </section>
 
 <footer
@@ -142,7 +145,7 @@
 			[appearOnScroll, { animation: 'animate-appear-down', animationOut: 'animate-disappear-down' }]
 		]}
 	>
-		Wanna buy me a coffe? Click here!
+		{$t('home.footer.donate')}
 		{#snippet appendIcon()}
 			<IconChevronRight />
 		{/snippet}
@@ -155,7 +158,14 @@
 				animationOut: 'opacity-0 translate-y-full'
 			}}
 		>
-			<AtomButton variant="text" shadow="8px" href={me.links.linkedin}><LogoLinkedIn /></AtomButton>
+			<AtomButton
+				variant="text"
+				shadow="8px"
+				aria-label={$t('home.footer.socials.linkedin')}
+				href={me.links.linkedin}
+			>
+				<LogoLinkedIn />
+			</AtomButton>
 		</li>
 		<li
 			class="transition ease-in-out duration-1000"
@@ -164,7 +174,14 @@
 				animationOut: 'opacity-0 translate-y-full'
 			}}
 		>
-			<AtomButton variant="text" shadow="8px" href={me.links.github}><LogoGithub /></AtomButton>
+			<AtomButton
+				variant="text"
+				shadow="8px"
+				aria-label={$t('home.footer.socials.github')}
+				href={me.links.github}
+			>
+				<LogoGithub />
+			</AtomButton>
 		</li>
 	</ul>
 	<span
@@ -174,7 +191,7 @@
 			animationOut: 'opacity-0 translate-y-full'
 		}}
 	>
-		Developed by me :)
+		{$t('home.footer.author')}
 	</span>
 	<span
 		class="mt-1 font-stylized text-xs drop-shadow-4px transition ease-in-out duration-1000"
@@ -183,7 +200,7 @@
 			animationOut: 'opacity-0 translate-y-full'
 		}}
 	>
-		Powered by SvelteKit & Tailwind CSS
+		{$t('home.footer.frameworks')}
 	</span>
 </footer>
 
@@ -198,15 +215,22 @@
 			<IconError />
 		{/snippet}
 		{#if effectError instanceof CanvasBlockedError}
-			<p class="font-stylized text-lg">{effectError.message}</p>
+			<p class="font-stylized text-lg">{$t('error_messages.blocked_canvas')}</p>
 		{:else if effectError instanceof WebGL2ShaderCompilationError}
-			<h3 class="font-stylized text-2xl">A shader compilation error occurred.</h3>
-			<span class="mt-2">Details:</span>
+			<h3 class="font-stylized text-2xl">{$t('error_messages.shader_compilation')}</h3>
+			<span class="mt-2">{$t('error_messages.details')}</span>
 			<pre
 				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
 					>{effectError.errors
 						.map(({ row, column, message }) => `${row}:${column}: ${message}`)
 						.join('\n')}</samp
+				></pre>
+		{:else}
+			<h3 class="font-stylized text-2xl">{$t('error_messages.unknown')}</h3>
+			<span class="mt-2">{$t('error_messages.details')}</span>
+			<pre
+				class="mt-2 flex-1 border border-separator bg-acrylic/60 p-4 text-danger-250 overflow-auto font-mono"><samp
+					>{effectError instanceof Error ? effectError.message : `${effectError}`}</samp
 				></pre>
 		{/if}
 	</Dialog>

@@ -16,6 +16,7 @@
 	import IconPerson from 'virtual:icons/pixelent/person-32-regular';
 	import IconCup from 'virtual:icons/pixelent/cup-32-regular';
 	import { page } from '$app/stores';
+	import { t } from '$lib/i18n';
 
 	let { open = $bindable(), activator }: Props = $props();
 
@@ -48,6 +49,7 @@
 	{activator}
 >
 	<AtomButton
+		aria-label={$t('sidebar.labels.close')}
 		class="fixed top-10 left-10 p-2"
 		variant="text"
 		shadow
