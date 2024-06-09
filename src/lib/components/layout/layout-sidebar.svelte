@@ -26,7 +26,7 @@
 	export const close = $derived(modalRef!.close);
 </script>
 
-{#snippet menuItem(icon: ComponentType, title: string, href: string, active: boolean)}
+{#snippet menuItem(icon: ComponentType, id: string, href: string, active: boolean)}
 	<a
 		{href}
 		class="
@@ -38,7 +38,7 @@
 		<i>
 			<svelte:component this={icon} />
 		</i>
-		<span class="font-stylized leading-none">{title}</span>
+		<span class="font-stylized leading-none">{$t(`sidebar.pages.${id}`)}</span>
 	</a>
 {/snippet}
 
@@ -59,9 +59,9 @@
 	</AtomButton>
 
 	<nav class="flex-col mt-14">
-		{@render menuItem(IconHouse, 'Home', '/', $page.route.id === '/')}
-		{@render menuItem(IconNews, 'Blog', '/blog', $page.route.id === '/blog')}
-		{@render menuItem(IconPerson, 'About me', '/me', $page.route.id === '/me')}
-		{@render menuItem(IconCup, 'Gimme money', '/donate', $page.route.id === '/donate')}
+		{@render menuItem(IconHouse, 'home', '/', $page.route.id === '/')}
+		{@render menuItem(IconNews, 'blog', '/blog', $page.route.id === '/blog')}
+		{@render menuItem(IconPerson, 'me', '/me', $page.route.id === '/me')}
+		{@render menuItem(IconCup, 'donate', '/donate', $page.route.id === '/donate')}
 	</nav>
 </Modal>

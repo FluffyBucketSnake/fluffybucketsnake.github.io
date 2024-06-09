@@ -6,7 +6,9 @@
     },
     "pages": {
       "home": "Home",
-      "me": ""
+      "blog": "Blog",
+      "me": "About me",
+      "donate": "Gimme money :)"
     }
   },
   "dialog": {
