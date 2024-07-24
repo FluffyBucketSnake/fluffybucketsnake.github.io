@@ -32,7 +32,7 @@
 				aria-label={$t('sidebar.labels.open')}
 				variant="text"
 				shadow="8px"
-				class="fixed left-2 top-2 p-2"
+				class="fixed left-2 top-2 p-2 z-10"
 				{onclick}
 			>
 				<IconMenu />
