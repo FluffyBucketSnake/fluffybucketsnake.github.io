@@ -21,3 +21,7 @@
 		src: url('/assets/fonts/Pixellari.ttf');
 	}
 }
+
+body {
+	@apply text-fg bg-carbon;
+}
