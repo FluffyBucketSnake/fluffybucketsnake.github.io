@@ -5,8 +5,9 @@
 	import type { Action } from 'svelte/action';
 
 	export interface ISharedProps {
-		color?: 'default' | 'primary' | 'secondary' | 'danger';
+		color?: 'default' | 'inverted' | 'primary' | 'secondary' | 'danger';
 		shadow?: boolean | '8px';
+		shadowTint?: 'default' | 'secondary';
 		variant?: 'filled' | 'text';
 		prependIcon?: Snippet;
 		appendIcon?: Snippet;
@@ -37,6 +38,8 @@
 				base: 'p-2',
 				default:
 					'border border-matte hover:border-separator focus:border-separator-hl active:border-carbon bg-carbon hover:bg-matte focus:bg-matte active:bg-carbon text-fg',
+				inverted:
+					'border border-matte hover:border-separator focus:border-separator-hl active:border-carbon bg-carbon hover:bg-matte focus:bg-matte active:bg-carbon text-fg-inv',
 				primary:
 					'border border-primary-400 hover:border-primary-200 focus:border-primary-200 active:border-primary-500 bg-primary-500 hover:bg-primary-400 focus:bg-primary-400 active:bg-primary-600 text-primary-fg',
 				secondary:
@@ -47,6 +50,7 @@
 			text: {
 				base: 'p-1 border-transparent bg-transparent',
 				default: 'text-fg hover:bg-fg/5 focus:bg-fg/5 active:bg-fg/15',
+				inverted: 'text-fg-inv hover:bg-fg-inv/10 focus:bg-fg-inv/10 active:bg-fg-inv/25',
 				primary: '',
 				secondary: '',
 				danger:
@@ -55,12 +59,24 @@
 		},
 		shadows: {
 			box: {
-				4: 'shadow-4px hover:shadow-8px focus:shadow-8px active:shadow-2px',
-				8: 'shadow-8px hover:shadow-16px focus:shadow-16px active:shadow-4px'
+				default: {
+					4: 'shadow-4px hover:shadow-8px focus:shadow-8px active:shadow-2px',
+					8: 'shadow-8px hover:shadow-16px focus:shadow-16px active:shadow-4px'
+				},
+				secondary: {
+					4: '',
+					8: ''
+				}
 			},
 			drop: {
-				4: 'drop-shadow-4px hover:drop-shadow-8px focus:drop-shadow-8px active:drop-shadow-2px',
-				8: 'drop-shadow-8px hover:drop-shadow-16px focus:drop-shadow-16px active:drop-shadow-4px'
+				default: {
+					4: 'drop-shadow-4px hover:drop-shadow-8px focus:drop-shadow-8px active:drop-shadow-2px',
+					8: 'drop-shadow-8px hover:drop-shadow-16px focus:drop-shadow-16px active:drop-shadow-4px'
+				},
+				secondary: {
+					4: 'drop-shadow-secondary-4px hover:drop-shadow-secondary-8px focus:drop-shadow-secondary-8px active:drop-shadow-secondary-2px',
+					8: 'drop-shadow-secondary-8px hover:drop-shadow-secondary-16px focus:drop-shadow-secondary-16px active:drop-shadow-secondary-4px'
+				}
 			}
 		}
 	};
@@ -74,6 +90,7 @@
 		children,
 		color = 'default',
 		shadow = false,
+		shadowTint = 'default',
 		variant = 'filled',
 		prependIcon,
 		appendIcon,
@@ -81,9 +98,15 @@
 		...attrs
 	}: Props = $props();
 
-	const useDropShadow = $derived(variant == 'text');
-	const classes = $derived(
-		`${style.base} ${style.layout[((prependIcon ? 1 : 0) | (appendIcon ? 2 : 0)) as 0 | 1 | 2 | 3]} ${style.variants[variant].base} ${style.variants[variant][color]} ${shadow && style.shadows[useDropShadow ? 'drop' : 'box'][shadow === '8px' ? 8 : 4]} ${attrs.class}`
+	const shadowKind = $derived(variant == 'text' ? 'drop' : 'box');
+	const layoutClasses = $derived(
+		style.layout[((prependIcon ? 1 : 0) | (appendIcon ? 2 : 0)) as 0 | 1 | 2 | 3]
+	);
+	const variantClasses = $derived(
+		`${style.variants[variant].base} ${style.variants[variant][color]}`
+	);
+	const shadowClasses = $derived(
+		shadow && style.shadows[shadowKind][shadowTint][shadow === '8px' ? 8 : 4]
 	);
 </script>
 
@@ -102,11 +125,20 @@
 {/snippet}
 
 {#if href != null}
-	<a {...attrs as HTMLAnchorAttributes} class={classes} {href} use:useActions={use}>
+	<a
+		{...attrs as HTMLAnchorAttributes}
+		class="{style.base} {layoutClasses} {variantClasses} {shadowClasses} {attrs.class}"
+		{href}
+		use:useActions={use}
+	>
 		{@render content()}
 	</a>
 {:else}
-	<button {...attrs as HTMLButtonAttributes} class={classes} use:useActions={use}>
+	<button
+		{...attrs as HTMLButtonAttributes}
+		class="{style.base} {layoutClasses} {variantClasses} {shadowClasses} {attrs.class}"
+		use:useActions={use}
+	>
 		{@render content()}
 	</button>
 {/if}
