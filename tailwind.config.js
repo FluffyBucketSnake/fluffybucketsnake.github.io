@@ -10,6 +10,12 @@ export default {
 		},
 		extend: {
 			typograph: { gray: { css: { '--tw-prose-body': '#F00' } } },
+			fontSize: {
+				28: '1.75em'
+			},
+			spacing: {
+				15: '3.75em'
+			},
 			colors: {
 				darkest: '#212123',
 				lightest: '#f2f0e5',
@@ -31,7 +37,7 @@ export default {
 				secondary: {
 					200: '#ede19e',
 					400: '#c2d368',
-					500: '#b2b47e',
+					500: '#a2b47e',
 					600: '#7b7243',
 					800: '#4e584a',
 					fg: '#212123'
@@ -64,7 +70,11 @@ export default {
 				'8px': '8px 8px #212123',
 				'16px': '16px 16px #212123',
 				'32px': '32px 32px #212123C0',
-				'64px': '64px 64px #212123'
+				'64px': '64px 64px #212123',
+				'secondary-2px': '2px 2px #7b7243',
+				'secondary-4px': '4px 4px #7b7243',
+				'secondary-8px': '8px 8px #7b7243',
+				'secondary-16px': '16px 16px #7b7243'
 			},
 			boxShadow: {
 				'2px': '2px 2px #212123',
