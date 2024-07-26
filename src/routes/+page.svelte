@@ -7,7 +7,6 @@
 	import DialogRenderError from '$lib/components/dialogs/dialog-render-error.svelte';
 	import AtomButton from '$lib/components/atoms/atom-button.svelte';
 	import AnimatedText from '$lib/components/utils/animated-text.svelte';
-	import ProgressiveEnhancement from '$lib/components/utils/progressive-enhancement.svelte';
 	import EffectCanvas from '$lib/components/base/effect-canvas.svelte';
 	import { wavesEffect } from '$lib/effects/waveEffects';
 	import LogoGithub from 'virtual:icons/pixelent/logo-github-32-filled';
@@ -17,16 +16,18 @@
 	import IconMenu from 'virtual:icons/pixelent/menu-24-regular';
 	import background from '$lib/assets/img/bg-wavy.png';
 	import me from '$lib/assets/me.json';
+	import { useProgressiveEnhancement } from '$lib/composables/progressive-enhancement.svelte.js';
 
 	const formatPostDate = format('PPP');
 
 	const { data } = $props();
 
 	let effectError: unknown = $state();
+	const pe = useProgressiveEnhancement();
 </script>
 
 <div class="flex flex-col overflow-x-clip">
-	<ProgressiveEnhancement>
+	{#if pe.hasJs}
 		<LayoutSidebar>
 			{#snippet activator({ onclick })}
 				<AtomButton
@@ -40,7 +41,7 @@
 				</AtomButton>
 			{/snippet}
 		</LayoutSidebar>
-	</ProgressiveEnhancement>
+	{/if}
 
 	<header class="w-screen min-h-screen h-[546px] flex justify-center items-center">
 		<h1 class="flex flex-col items-center">
