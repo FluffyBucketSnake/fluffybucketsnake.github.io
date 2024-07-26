@@ -166,7 +166,7 @@
 				<AtomButton
 					variant="text"
 					shadow="8px"
-					aria-label={$t('home.footer.socials.linkedin')}
+					aria-label={$t('footer.socials.linkedin')}
 					href={me.links.linkedin}
 				>
 					<LogoLinkedIn />
@@ -182,7 +182,7 @@
 				<AtomButton
 					variant="text"
 					shadow="8px"
-					aria-label={$t('home.footer.socials.github')}
+					aria-label={$t('footer.socials.github')}
 					href={me.links.github}
 				>
 					<LogoGithub />
@@ -196,7 +196,7 @@
 				animationOut: 'opacity-0 translate-y-full'
 			}}
 		>
-			{$t('home.footer.author')}
+			{$t('footer.author')}
 		</span>
 		<span
 			class="mt-1 font-stylized text-xs drop-shadow-4px transition ease-in-out duration-1000"
@@ -205,7 +205,7 @@
 				animationOut: 'opacity-0 translate-y-full'
 			}}
 		>
-			{$t('home.footer.frameworks')}
+			{$t('footer.frameworks')}
 		</span>
 	</footer>
 </div>

@@ -16,7 +16,7 @@
 				color="inverted"
 				shadow
 				shadowTint="secondary"
-				aria-label={$t('home.footer.socials.linkedin')}
+				aria-label={$t('footer.socials.linkedin')}
 				href={me.links.linkedin}
 			>
 				<LogoLinkedIn />
@@ -28,7 +28,7 @@
 				color="inverted"
 				shadow
 				shadowTint="secondary"
-				aria-label={$t('home.footer.socials.github')}
+				aria-label={$t('footer.socials.github')}
 				href={me.links.github}
 			>
 				<LogoGithub />
@@ -36,9 +36,9 @@
 		</li>
 	</ul>
 	<span class="font-stylized">
-		{$t('home.footer.author')}
+		{$t('footer.author')}
 	</span>
 	<span class="font-stylized text-xs">
-		{$t('home.footer.frameworks')}
+		{$t('footer.frameworks')}
 	</span>
 </footer>

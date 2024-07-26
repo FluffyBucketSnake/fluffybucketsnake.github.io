@@ -11,6 +11,14 @@
       "donate": "Gimme money :)"
     }
   },
+  "footer": {
+    "socials": {
+      "linkedin": "See my LinkedIn page",
+      "github": "See my Github repositories"
+    },
+    "author": "Developed by me :)",
+    "frameworks": "Powered by SvelteKit & Tailwind CSS"
+  },
   "dialog": {
     "title": {
       "error": "Error"
@@ -39,13 +47,7 @@
       "cta": "Click here to see more!"
     },
     "footer": {
-      "donate": "Wanna buy me a coffe? Click here!",
-      "socials": {
-        "linkedin": "See my LinkedIn page",
-        "github": "See my Github repositories"
-      },
-      "author": "Developed by me :)",
-      "frameworks": "Powered by SvelteKit & Tailwind CSS"
+      "donate": "Wanna buy me a coffe? Click here!"
     },
     "background": {
       "show_errors": "An error ocurred while rendering. Click here to see more details"
