@@ -2,6 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import icons from 'unplugin-icons/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+import { searchForWorkspaceRoot } from 'vite';
 
 export default defineConfig({
 	plugins: [
@@ -17,5 +18,10 @@ export default defineConfig({
 	],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	server: {
+		fs: {
+			allow: [`${searchForWorkspaceRoot(process.cwd())}/posts`]
+		}
 	}
 });
