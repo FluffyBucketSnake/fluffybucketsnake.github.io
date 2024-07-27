@@ -47,7 +47,7 @@
 			<ol class="contents">
 				{#each data.posts as post (post.slug)}
 					<li>
-						<a href={post.link} class="group focus:outline-0">
+						<a href={post.path} class="group focus:outline-0">
 							<article
 								class="bg-matte shadow-2px group-hover:shadow-4px group-focus:shadow-4px group-active:shadow-1px flex flex-col p-2 gap-2 transition"
 							>

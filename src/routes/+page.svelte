@@ -112,10 +112,10 @@
 		class="mt-[50vh] w-screen min-h-[200vh] h-[1092px] lg:min-h-[100vh] flex justify-center lg:justify-end lg:pr-[112px] items-center"
 	>
 		{#snippet blog()}
-			<ol class="lg:pb-2 flex flex-col lg:flex-row items-center gap-4 lg:overflow-x-scroll w-full">
+			<ol class="lg:pb-2 flex flex-col lg:flex-row items-center gap-4 lg:overflow-x-auto w-full">
 				{#each data.blogPosts as post (post.slug)}
 					<li>
-						<a href={post.link} class="group focus:outline-0">
+						<a href={post.path} class="group focus:outline-0">
 							<article
 								class="w-[240px] h-[160px] bg-matte shadow-4px group-hover:shadow-8px group-focus:shadow-8px group-active:shadow-2px flex flex-col p-2 gap-2 transition"
 							>
